@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <!-- caterpillar -->
+    @Scripts.Render("~/bundles/caterpillar")
+    @Scripts.Render("~/bundles/d3.v3.min")
+
+    @RenderSection("scripts", required: false)
+
+</head>
+
+<body>
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <a href="#" class="navbar-brand"> <img class "featuredImg img-circle" src="img/bla.jpg" width="20%">Caterpillar </a>
+
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="collapse navbar-collapse navHeaderCollapse">
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="active"><a href="#">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Gooogle+</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#contact" data-toggle="modal">Contact</a></li>
+
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="lijeviTab col-sm-2">
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <center>
+                            <img class "featuredImg img-circle" src="img/krug.png" width="80%">
+                            <h4 class="list-group-item-heading">Current Topic</h4>
+                            <p class="list-group-item-text">Currently active topic</p>
+                        </center>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <center>
+                            <h4 class="list-group-item-heading">Know</h4>
+                            <p class="list-group-item-text">What i know about the topic!</p>
+                        </center>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <center>
+                            <h4 class="list-group-item-heading">Want to know</h4>
+                            <p class="list-group-item-text">What i want to know about the topic!</p>
+                        </center>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <center>
+                            <h4 class="list-group-item-heading">What i learned</h4>
+                            <p class="list-group-item-text">What i learned studying the topic!</p>
+                        </center>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            <div class="lijeviTab col-sm-2">
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <center>
+                            <h1 class="list-group-item-heading">Main Menu</h1>
+                        </center>
+                    </a>
+                    <div class="list-group-item">
+                        <center>
+                            <h4 class="list-group-item-heading">Users:</h4>
+                        </center>
+                        <a href="#"><p class="list-group-item-body">Me</p></a>
+                        <a href="#"><p class="list-group-item-body">Teacher</p></a>
+                        <ol>
+                            <li>Student 1</li>
+                            <li>Student 2</li>
+                            <li>Student 3</li>
+                            <li>Student 4</li>
+                            <li>Student 5</li>
+                        </ol>
+                    </div>
+                    <a href="#" class="list-group-item">
+                        <center>
+                            <h4 class="list-group-item-heading">Score</h4>
+                        </center>
+                        <ol>
+                            <li>Student 1</li>
+                            <li>Student 2</li>
+                            <li>Student 3</li>
+                            <li>Student 4</li>
+                            <li>Student 5</li>
+                        </ol>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <p class="navbar-text pull-left">Site Built by Delan</p>
+            <a class="navbar-btn btn-danger btn pull-right">Subscribe on Youtube</a>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="contact" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="form-horizontal">
+                    <div class="modal-header">
+                        <h4>Contact Caterpillar Support</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="contact-name" class="col-lg-2 control-label">Name:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="contact-name" placeholder="Full name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email" class="col-lg-2 control-label">E-mail:</label>
+                            <div class="col-lg-10">
+                                <input type="email" class="form-control" id="contact-name" placeholder="you@example.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message" class="col-lg-2 control-label">Name:</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="8"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="submit">Submit</button>
+                        <a class="btn btn-primary" data-dismiss="modal">Close</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
