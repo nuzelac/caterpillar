@@ -1,5 +1,12 @@
 ﻿body{
 	margin-bottom: 80px;
+  font-family: High Tower Text;
+  font-size: 20px;
+}
+
+.list-group-item-heading{
+
+font-weight: bold;
 }
 
 .page-header {
@@ -15,14 +22,99 @@
 }
 
 .lijeviTab{
-	background-color: #F26522;
+  padding-top:10px;
+	background-color: #e8e8e8;
+  padding-bottom:10px;
+  padding-left:10px;
+  padding-right:10px;
 }
+
+.lijeviTab1{
+  padding-top:30px;
+	background-color: #ffffff;
+  padding-bottom:30px;
+
+  
+}
+
+.lijeviTab2{
+  padding-top:10px;
+	background-color: #fde0c8;
+  padding-left:10px;
+  padding-right:10px;
+  padding-bottom:10px;
+  
+}
+
+.lijeviTab3{
+  padding-top:10px;
+	background-color: #e8e8e8;
+  padding-bottom:10px;
+  padding-left:10px;
+  
+}
+
+.lijeviTab4{
+  padding-top:10px;
+	background-color: #e8e8e8;
+  padding-bottom:10px;
+ 
+  padding-right:10px;
+}
+
+.lijeviTab5{
+  padding-top:10px;
+	
+  padding-bottom:10px;
+  padding-left:30px;
+  padding-right:30px;
+}
+
+.dolje{
+	background-color: #f1700f;
+  padding-top:50px;
+  padding-bottom:50px;
+}
+
 
 .list-group-item{
 	margin-top: 10px;
 	margin-bottom: 10px;
+  background-color: #ffffff;
 }
 
 .navbar-brand{
-	background-color: #F26522;
+	padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.redak{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.narancasto1{
+  color: #f1700f;
+  font-family: High Tower Text;
+}
+.narancasto1bold{
+  color: #f1700f;
+  font-weight: bold;
+  font-family: High Tower Text;
+}
+
+.bijelo1{
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  font-family: High Tower Text;
+}
+
+.crno1{
+  color: #010000;
+  font-weight: bold;
+  font-family: High Tower Text;
+  
 }
