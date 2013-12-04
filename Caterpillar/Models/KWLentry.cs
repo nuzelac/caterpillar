@@ -13,6 +13,8 @@ namespace Caterpillar.Models
 
         public int Id { get; set; }
         public int UserId { get; set; }
+        public int Type { get; set; }
+        public string Entry { get; set; }
         public virtual ICollection<IsResponseOn> IsResponseOns { get; set; }
         public virtual ICollection<IsResponseOn> IsResponseOns1 { get; set; }
         public virtual User User { get; set; }
