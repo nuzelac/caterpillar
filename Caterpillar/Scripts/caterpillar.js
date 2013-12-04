@@ -1,7 +1,7 @@
 ﻿$(function () {
 
-    var addQuestion = function () {
-        nodes.unshift({ text: "blablab la bla bla " + nodes.length, head: false, id: nodes.length });
+    var addQuestion = function (q) {
+        nodes.unshift({ text: q, head: false, id: nodes.length });
         if (nodes.length > 1) {
             links.push({ source: nodes[0], target: nodes[1] });
         }
@@ -14,9 +14,9 @@
         update();
     }
 
-    setTimeout(function () {
-        addQuestion("teeest");
-    }, 5000);
+    //setTimeout(function () {
+    //    addQuestion("teeest");
+    //}, 5000);
 
     var width = $('#caterpillar').width(),
       height = 800;
@@ -36,6 +36,7 @@
     var chart = $("#caterpillar-svg"),
         aspect = chart.width() / chart.height(),
         container = chart.parent();
+
     $(window).on("resize", function () {
         var targetWidth = container.width();
         chart.attr("width", targetWidth);
@@ -52,7 +53,6 @@
 
         var linkEnter = link.enter().append("line")
             .attr("class", "link")
-            // .style("stroke-width", function(d) { return Math.sqrt(d.value); });
             .style("stroke-width", 0);
 
         link.exit().remove();
@@ -76,26 +76,25 @@
                   return classes.join(" ");
               })
               .attr("r", 70)
-              .style("fill", function (d) { return color(d.group); })
+              .style("fill", "#fde0c8");
         ;
 
-        var w = 70;
-        var h = 70;
+        var w = 90;
+        var h = 95;
 
         nodeEnter.append("foreignObject")
           .attr({ width: w, height: h })
           .attr("x", function (d) {
-              return -30;
+              return -37;
           })
           .attr('y', function (d) {
-              return -30;
+              return -40;
           })
-          .append("xhtml:body")
           .append("xhtml:div")
           .style({
               width: w + 'px',
               height: h + 'px',
-              "font-size": "15px"
+              "font-size": "17px"
           })
             .html(function (d) {
                 if (d.head !== true)
@@ -162,8 +161,8 @@
     update();
 
     addHead();
-    for (i = 0; i < 5; ++i) {
-        addQuestion("ja sam mali mate");
+    for (i in questions) {
+        addQuestion(questions[i]);
     }
 
 });

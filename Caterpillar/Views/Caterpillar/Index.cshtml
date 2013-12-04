@@ -4,5 +4,9 @@
     ViewBag.Title = "Index";
 }
 
+<script type="text/javascript">
+    var questions = [@Html.Raw(String.Join(",", Model.Select(s => "'" + s.Entry + "'")))];
+</script>
+
 <div id="caterpillar">
 </div>
