@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaterpillarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginScreenController.cs" />
     <Compile Include="Controllers\QuestionExampleController.cs" />
     <Compile Include="Controllers\QuestionsExampleController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -286,6 +287,12 @@
     <Content Include="Views\Caterpillar\Details.cshtml" />
     <Content Include="Views\Caterpillar\Edit.cshtml" />
     <Content Include="Views\Caterpillar\Index.cshtml" />
+    <Content Include="Views\LoginScreen\Create.cshtml" />
+    <Content Include="Views\LoginScreen\Delete.cshtml" />
+    <Content Include="Views\LoginScreen\Details.cshtml" />
+    <Content Include="Views\LoginScreen\Edit.cshtml" />
+    <Content Include="Views\LoginScreen\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
