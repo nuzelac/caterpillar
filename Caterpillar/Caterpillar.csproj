@@ -169,10 +169,19 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaterpillarController.cs" />
+    <Compile Include="Controllers\ClassController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\CourseTopicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginScreenController.cs" />
+    <Compile Include="Controllers\MainMenuAdminController.cs" />
+    <Compile Include="Controllers\MainMenuStudentController.cs" />
+    <Compile Include="Controllers\MainMenuTeacherController.cs" />
     <Compile Include="Controllers\QuestionExampleController.cs" />
     <Compile Include="Controllers\QuestionsExampleController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\TopicController.cs" />
+    <Compile Include="Controllers\UserClassCourseController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -180,6 +189,11 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CaterpillarContext.cs" />
     <Compile Include="Models\Class.cs" />
+    <Compile Include="Models\CourseTopicViewModel.cs" />
+    <Compile Include="Models\StudentsClassCourseViewModel.cs" />
+    <Compile Include="Models\TOPICSClassCourseViewModel.cs" />
+    <Compile Include="Models\USERSClassCourseViewModel.cs" />
+    <Compile Include="Models\UserTopicViewModel.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseTopic.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -286,10 +300,53 @@
     <Content Include="Views\Caterpillar\Details.cshtml" />
     <Content Include="Views\Caterpillar\Edit.cshtml" />
     <Content Include="Views\Caterpillar\Index.cshtml" />
+    <Content Include="Views\LoginScreen\Create.cshtml" />
+    <Content Include="Views\LoginScreen\Delete.cshtml" />
+    <Content Include="Views\LoginScreen\Details.cshtml" />
+    <Content Include="Views\LoginScreen\Edit.cshtml" />
+    <Content Include="Views\LoginScreen\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Class\Create.cshtml" />
+    <Content Include="Views\Class\Delete.cshtml" />
+    <Content Include="Views\Class\Details.cshtml" />
+    <Content Include="Views\Class\Edit.cshtml" />
+    <Content Include="Views\Class\Index.cshtml" />
+    <Content Include="Views\Course\Create.cshtml" />
+    <Content Include="Views\Course\Delete.cshtml" />
+    <Content Include="Views\Course\Details.cshtml" />
+    <Content Include="Views\Course\Edit.cshtml" />
+    <Content Include="Views\Course\Index.cshtml" />
+    <Content Include="Views\CourseTopic\Create.cshtml" />
+    <Content Include="Views\CourseTopic\Delete.cshtml" />
+    <Content Include="Views\CourseTopic\Details.cshtml" />
+    <Content Include="Views\CourseTopic\Edit.cshtml" />
+    <Content Include="Views\CourseTopic\Index.cshtml" />
+    <Content Include="Views\Topic\Create.cshtml" />
+    <Content Include="Views\Topic\Delete.cshtml" />
+    <Content Include="Views\Topic\Details.cshtml" />
+    <Content Include="Views\Topic\Edit.cshtml" />
+    <Content Include="Views\Topic\Index.cshtml" />
+    <Content Include="Views\UserClassCourse\Create.cshtml" />
+    <Content Include="Views\UserClassCourse\Delete.cshtml" />
+    <Content Include="Views\UserClassCourse\Details.cshtml" />
+    <Content Include="Views\UserClassCourse\Edit.cshtml" />
+    <Content Include="Views\UserClassCourse\Index.cshtml" />
+    <Content Include="Views\MainMenuStudent\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutMainMenuStudent.cshtml" />
+    <Content Include="Views\Shared\_LayoutMainMenuStudentGore.cshtml" />
+    <Content Include="Views\Shared\_LayoutMainMenuTeacher.cshtml" />
+    <Content Include="Views\MainMenuTeacher\Index.cshtml" />
+    <Content Include="Views\MainMenuTeacher\ViewStudents.cshtml" />
+    <Content Include="Views\MainMenuTeacher\ViewTopics.cshtml" />
+    <Content Include="Views\MainMenuTeacher\CreateNewTopic.cshtml" />
+    <Content Include="Views\MainMenuTeacher\Edit.cshtml" />
+    <Content Include="Views\MainMenuTeacher\Delete.cshtml" />
+    <Content Include="Views\MainMenuAdmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\App_LocalResources\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

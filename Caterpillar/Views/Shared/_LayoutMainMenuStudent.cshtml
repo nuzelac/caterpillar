@@ -1,0 +1,217 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!-- caterpillar -->
+    @Scripts.Render("~/bundles/caterpillar")
+    @Scripts.Render("~/bundles/d3.v3")
+
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <a href="Caterpillar" class="navbar-brand" style="width: 300px;"> <img class "background-image img-circle" src="@Url.Content("~/Content/img/caterpillar-pia-nacrtano-dobrasiva.jpg")" width="100%">  </a>
+
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <div class="collapse navbar-collapse navHeaderCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="home">Home</a></li>
+                    <li><a href="Account/Login">Login</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Gooogle+</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact" data-toggle="modal">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+    <div class="container">
+        <div class="row">
+            <div class=" col-sm-3">
+                <div class="list-group">
+
+                    <a href="#" class="list-group-item">
+                        <center>
+                            <img class "featuredImg img-circle" src="img/photo.JPG" width="90%">
+
+                        </center>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <center>
+                            <h1 class="narancasto1bold" style="font-width: bold;"> Name Surname </h1>
+                            
+
+                            <h1></h1>
+                            <h4 class="narancasto1"> Class: 3.b</h4>
+                            <h4 class="narancasto1"> School: SchoolName</h4>
+
+
+                        </center>
+                    </a>
+
+                </div>
+            </div>
+
+
+            <div class="lijeviTab col-sm-7">
+                <div class="lijeviTab5 row">
+
+
+                    <div class="lijeviTab1 col-sm-4 ">
+                        <center>
+                            <a href="CaterpillarK.html">
+                                <img src="img/topic-photo.JPG" class "img-circle" width="60%">
+                                <h4 class="crno1"> NameOfTheTopic1 </h4>
+                            </a>
+                        </center>
+                    </div>
+                    <div class="lijeviTab1 col-sm-4">
+                        <center>
+                            <a href="CaterpillarK.html">
+                                <img class "featuredImg img-circle" src="img/topic-photo.JPG" width="60%">
+                                <h4 class="crno1"> NameOfTheTopic2 </h4>
+                            </a>
+                        </center>
+                    </div>
+                    <div class="lijeviTab1 col-sm-4">
+                        <center>
+                            <a href="CaterpillarK.html">
+                                <img class "featuredImg img-circle" src="img/topic-photo.JPG" width="60%">
+                                <h4 class="crno1"> NameOfTheTopic3 </h4>
+                            </a>
+                        </center>
+                    </div>
+
+
+
+                </div>
+
+                <div class="lijeviTab ">
+                    <div class="lijeviTab3 col-sm-6">
+                        <div class="lijeviTab2 " style="background-color:#f6996c">
+                            <h2 class="bijelo1">Recent projects:</h2>
+                            <ul>
+                                <li><a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1"> NameOfTheTopic4 </h4></li></a>
+                                <li><a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1"> NameOfTheTopic5 </h4></li></a>
+                                <li><a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1"> NameOfTheTopic6 </h4></li></a>
+                                <li><a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1"> NameOfTheTopic7 </h4></li></a>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="lijeviTab4 col-sm-6">
+                        <div class="lijeviTab2  " style="background-color:#f6996c">
+                            <h2 class="bijelo1">Teacher's reviews:</h2>
+                            <ul>
+                                <li>
+                                    <a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1"> NameOfTheTopic4 </h4> </a>
+                                    <p class="text-right"> Well done<p>
+                                </li>
+                                <li>
+                                    <a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1"> NameOfTheTopic5 </h4> </a>
+                                    <p class="text-right"> Not sufficient<p>
+                                </li>
+                                <li>
+                                    <a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1"> NameOfTheTopic6 </h4> </a>
+                                    <p class="text-right"> Improvement is visible, bravo!<p>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="lijeviTab col-sm-2">
+                <div class="list-group" style="background-color: #ffffff;">
+
+                    <h2 class="narancasto1bold"><center>Subjects:</center></h2>
+
+                    <center>
+                        <ul>
+                            <li><a href="#"><h3 class="crno1">Subject1</h3></a></li>
+                            <li><a href="#"><h3 class="crno1">Subject2</h3></a></li>
+                            <li><a href="#"><h3 class="crno1">Subject3</h3></a></li>
+                            <li><a href="#"><h3 class="crno1">Subject4</h3></a></li>
+                            <li><a href="#"><h3 class="crno1">Subject5</h3></a></li>
+                            <li><a href="#"><h3 class="crno1">Subject6</h3></a></li>
+                            <li><a href="#"><h3 class="crno1">Subject7</h3></a></li>
+                        </ul>
+                        <center>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--		<div class = "navbar navbar-default navbar-fixed-bottom">
+                <div class = "container">
+                    <p class = "navbar-text pull-left">Site Built by Delan</p>
+                    <a class = "navbar-btn btn-danger btn pull-right">Subscribe on Youtube</a>
+                </div>
+    -->
+    </div>
+
+    <div class="modal fade" id="contact" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="form-horizontal">
+                    <div class="modal-header">
+                        <h4>Contact Caterpillar Support</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="contact-name" class="col-lg-2 control-label">Name:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="contact-name" placeholder="Full name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email" class="col-lg-2 control-label">E-mail:</label>
+                            <div class="col-lg-10">
+                                <input type="email" class="form-control" id="contact-name" placeholder="you@example.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message" class="col-lg-2 control-label">Name:</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="8"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="submit">Submit</button>
+                        <a class="btn btn-primary" data-dismiss="modal">Close</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

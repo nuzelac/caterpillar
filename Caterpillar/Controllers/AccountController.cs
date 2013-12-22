@@ -45,11 +45,14 @@ namespace Caterpillar.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.UserName, model.Password);
-                if (user != null)
+                System.Web.Security.FormsAuthentication.SignOut();
+                //var user = await UserManager.FindAsync(model.UserName, model.Password);
+                CaterpillarContext db = new CaterpillarContext();
+                List<User> foundUsers = db.Users.Where(u=>u.UserName == model.UserName && u.Password == model.Password).ToList();
+                if (foundUsers.Count > 0)
                 {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    System.Web.Security.FormsAuthentication.SetAuthCookie(foundUsers[0].UserName, true);
+                    System.Web.Security.FormsAuthentication.RedirectToLoginPage();
                 }
                 else
                 {
