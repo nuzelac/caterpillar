@@ -18,6 +18,7 @@ using Microsoft.Owin.Security;
 
 namespace Caterpillar.Controllers
 {
+    [Authorize(Roles = "Administrator")]
 	public class MainMenuAdminController : Controller
 	{
 		public MainMenuAdminController()

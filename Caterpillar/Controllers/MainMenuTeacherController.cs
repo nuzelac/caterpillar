@@ -18,6 +18,7 @@ using Microsoft.Owin.Security;
 
 namespace Caterpillar.Controllers
 {
+	[Authorize(Roles = "Teacher")]
 	public class MainMenuTeacherController : Controller
 	{
 		public MainMenuTeacherController()

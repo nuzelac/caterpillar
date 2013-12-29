@@ -137,7 +137,7 @@
         headTicalaImage.exit().remove();
 
         node.on("click", function (e) {
-            $('#kwl').modal(options);
+            $('#kwl').modal('show');
         });
 
         force.on("tick", function (e) {

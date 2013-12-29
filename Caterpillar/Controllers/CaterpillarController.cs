@@ -10,6 +10,7 @@ using Caterpillar.Models;
 
 namespace Caterpillar.Controllers
 {
+    [Authorize]
     public class CaterpillarController : Controller
     {
         private CaterpillarContext db = new CaterpillarContext();

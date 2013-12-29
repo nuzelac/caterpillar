@@ -45,7 +45,7 @@
                             <a style="color:#f1700f">Hi @User.Identity.Name.ToString() ! </a>
                         }
                     </li>
-                    <li class="active"><a href="home">Home</a></li>
+                    <li class="active"><a href="../Home">Home</a></li>
                     <li>@if (Request.IsAuthenticated)
                         { 
                             @Html.ActionLink("Log Out", "LogOff", "Account")
@@ -122,9 +122,26 @@
                             </center>
                         </a>
                     }
-                    else if (((Role)Session["PrimljeniUser-Role"]).Name == "Administrator")
+                    //else if (((Role)Session["PrimljeniUser-Role"]).Name == "Administrator")
+                    else if (User.IsInRole("Administrator"))
                     {
-                         <a href="MainMenuAdmin" class="list-group-item" style="background-color: #fdf0e7;">
+                         <a href="../MainMenuAdmin" class="list-group-item" style="background-color: #fdf0e7;">
+                            <center>
+                                <h1 class="list-group-item-heading">Main Menu</h1>
+                            </center>
+                         </a>
+                    }
+                    else if (User.IsInRole("Teacher"))
+                    {
+                         <a href="../MainMenuTeacher" class="list-group-item" style="background-color: #fdf0e7;">
+                            <center>
+                                <h1 class="list-group-item-heading">Main Menu</h1>
+                            </center>
+                         </a>
+                    }
+                    else if (User.IsInRole("Student"))
+                    {
+                         <a href="../MainMenuStudent" class="list-group-item" style="background-color: #fdf0e7;">
                             <center>
                                 <h1 class="list-group-item-heading">Main Menu</h1>
                             </center>

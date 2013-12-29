@@ -14,7 +14,6 @@
 // GUMB KOJI OTVARA MODAL - SAMO ZA TEST
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#kwl"> ovdje </button>
 
-
 //MODAL ZA PITANJE
 <div class="modal fade" id="kwl" role="dialog">
         <div class="modal-dialog">
@@ -23,21 +22,45 @@
                     <div class="modal-header">
                         <h4>Pitanje</h4>
                     </div>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Topic @Html.DisplayNameFor(model => model.Topic.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Entry)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Topic.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Entry)
+                            </td>
+                            <td>
+                                @Html.CheckBox(item.Id.ToString())
+                            </td>
+                        </tr>
+                    }
+
+
+                    </table>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="contact-name" class="col-lg-2 control-label">Name:</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="contact-name" placeholder="Full name">
-                            </div>
+                            <p>Odgovor:</p>
                         </div>
                         <div class="form-group">
-                            <label for="contact-email" class="col-lg-2 control-label">E-mail:</label>
-                            <div class="col-lg-10">
-                                <input type="email" class="form-control" id="contact-name2" placeholder="you@example.com">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="contact-message" class="col-lg-2 control-label">Name:</label>
+                            <label for="contact-message" class="col-lg-2 control-label">Odgovor:</label>
                             <div class="col-lg-10">
                                 <textarea class="form-control" rows="8"></textarea>
                             </div>

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Caterpillar.Models;
 
+
 namespace Caterpillar.Controllers
 {
     [Authorize]
@@ -28,6 +29,8 @@ namespace Caterpillar.Controllers
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
+
+        public RoleManager<IdentityRole> RoleManager { get; private set; }
 
         //
         // GET: /Account/Login
@@ -64,6 +67,12 @@ namespace Caterpillar.Controllers
                     Session["PrimljeniUser-UserClassCourse"] = currentUser.UserClassCourses;
                     Session["PrimljeniUser-KWLentry"] = currentUser.KWLentries;
                     Session["PrimljeniUser-Response"] = currentUser.Responses;
+                    //dodatno
+                    var authTicket = new System.Web.Security.FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddMinutes(20), true, currentUser.Role.Name);
+                    string encryptedTicket = System.Web.Security.FormsAuthentication.Encrypt(authTicket);
+                    var authCookie = new HttpCookie(System.Web.Security.FormsAuthentication.FormsCookieName, encryptedTicket);
+                    HttpContext.Response.Cookies.Add(authCookie);
+
                     if (currentUser.Role.Name == "Administrator")
                         return Redirect("../MainMenuAdmin");
                     else if (currentUser.Role.Name == "Student")
@@ -95,11 +104,39 @@ namespace Caterpillar.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register([Bind(Include = "Id,Name,Surname,UserName,Password")] User user)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
+                System.Web.Security.MembershipCreateStatus createStatus;
+                System.Web.Security.Membership.CreateUser(user.UserName, user.Password, null,null,null,true, out createStatus);
+
+                List<User> foundUsers = db.Users.Where(u => u.UserName == user.UserName).ToList();
+                if (foundUsers.Count == 0)
+                {
+                    user.RoleId = 3;
+                    user.Role = db.Roles.Where(u => u.Id == user.RoleId).FirstOrDefault();
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    System.Web.Security.FormsAuthentication.SetAuthCookie(user.UserName, false);
+                    Session["PrimljeniUser"] = user;
+                    Session["PrimljeniUser-UserName"] = user.UserName;
+                    Session["PrimljeniUser-Name"] = user.Name;
+                    Session["PrimljeniUser-Surname"] = user.Surname;
+                    Session["PrimljeniUser-Role"] = user.Role;
+                    Session["PrimljeniUser-UserClassCourse"] = user.UserClassCourses;
+                    Session["PrimljeniUser-KWLentry"] = user.KWLentries;
+                    Session["PrimljeniUser-Response"] = user.Responses;
+                    //dodatno
+                    var authTicket = new System.Web.Security.FormsAuthenticationTicket(1, user.Name, DateTime.Now, DateTime.Now.AddMinutes(20), true, user.Role.Name);
+                    string encryptedTicket = System.Web.Security.FormsAuthentication.Encrypt(authTicket);
+                    var authCookie = new HttpCookie(System.Web.Security.FormsAuthentication.FormsCookieName, encryptedTicket);
+                    HttpContext.Response.Cookies.Add(authCookie);
+                    return Redirect("../MainMenuStudent");
+                }
+
+
+                /*var user = new ApplicationUser() { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -109,11 +146,11 @@ namespace Caterpillar.Controllers
                 else
                 {
                     AddErrors(result);
-                }
+                }*/
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(user);
         }
 
         //

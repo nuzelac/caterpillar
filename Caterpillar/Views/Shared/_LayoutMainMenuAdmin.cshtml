@@ -32,7 +32,7 @@
                             <a style="color:#f1700f">Hi @User.Identity.Name.ToString() ! </a>
                         }
                     </li>
-                    <li class="active"><a href="home">Home</a></li>
+                    <li class="active"><a href="../Home">Home</a></li>
                     <li>@if (Request.IsAuthenticated)
                         { 
                             @Html.ActionLink("Log Out", "LogOff", "Account")
