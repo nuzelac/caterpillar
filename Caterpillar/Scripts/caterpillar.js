@@ -138,6 +138,7 @@
         node.on("click", function (d) {
             console.log(d);
             $('#kwl #tekst-pitanja').html(d.text);
+            $('#kwl #question-id').val(d.id);
             $('#kwl').modal('show');
         });
 
