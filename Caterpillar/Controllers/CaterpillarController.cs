@@ -19,6 +19,7 @@ namespace Caterpillar.Controllers
         {
             var kwlentries = db.KWLentries.Include(k => k.User);
             return View(kwlentries.ToList());
+            
         }
 
         // GET: /Caterpillar/Details/5

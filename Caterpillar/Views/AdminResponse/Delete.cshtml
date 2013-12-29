@@ -1,0 +1,64 @@
+﻿@model Caterpillar.Models.Response
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Response</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KWLentry.Entry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KWLentry.Entry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Response1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Response1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Correction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Correction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Points)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Points)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

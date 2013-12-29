@@ -47,6 +47,8 @@
     var nodes = force.nodes();
     var links = force.links();
 
+
+
     var update = function () {
         var link = svg.selectAll(".link")
             .data(links);
@@ -59,7 +61,8 @@
 
         var node = svg.selectAll("g")
                    .attr("class", "nodes")
-                   .data(nodes, function (d) { return d.id; });
+                   .data(nodes, function (d) { return d.id; })
+                   .on("click", function (d, i) { alert("Hello world"); });
 
         var nodeEnter = node.enter()
                    // Add one g element for each data node here.
@@ -133,6 +136,9 @@
 
         headTicalaImage.exit().remove();
 
+        node.on("click", function (e) {
+            $('#kwl').modal(options);
+        });
 
         force.on("tick", function (e) {
 

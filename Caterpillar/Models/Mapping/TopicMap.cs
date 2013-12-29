@@ -3,25 +3,21 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace Caterpillar.Models.Mapping
 {
-    public class TopicMap : EntityTypeConfiguration<Topic>
-    {
-        public TopicMap()
-        {
-            // Primary Key
-            this.HasKey(t => t.Id);
+	public class TopicMap : EntityTypeConfiguration<Topic>
+	{
+		public TopicMap()
+		{
+			// Primary Key
+			this.HasKey(t => t.Id);
 
-            // Properties
-            this.Property(t => t.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+			// Properties
+			this.Property(t => t.Name)
+				.IsRequired();
 
-            this.Property(t => t.Name)
-                .IsRequired();
-
-            // Table & Column Mappings
-            this.ToTable("Topic");
-            this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.Name).HasColumnName("Name");
-            this.Property(t => t.CourseId).HasColumnName("CourseId");
-        }
-    }
+			// Table & Column Mappings
+			this.ToTable("Topic");
+			this.Property(t => t.Id).HasColumnName("Id");
+			this.Property(t => t.Name).HasColumnName("Name");
+		}
+	}
 }

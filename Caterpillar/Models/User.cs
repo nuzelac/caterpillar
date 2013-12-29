@@ -8,6 +8,7 @@ namespace Caterpillar.Models
         public User()
         {
             this.KWLentries = new List<KWLentry>();
+            this.Responses = new List<Response>();
             this.UserClassCourses = new List<UserClassCourse>();
         }
 
@@ -18,6 +19,7 @@ namespace Caterpillar.Models
         public string Password { get; set; }
         public int RoleId { get; set; }
         public virtual ICollection<KWLentry> KWLentries { get; set; }
+        public virtual ICollection<Response> Responses { get; set; }
         public virtual Role Role { get; set; }
         public virtual ICollection<UserClassCourse> UserClassCourses { get; set; }
     }

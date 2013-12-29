@@ -1,0 +1,189 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!-- caterpillar -->
+    @Scripts.Render("~/bundles/caterpillar")
+    @Scripts.Render("~/bundles/d3.v3")
+
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <a href="Caterpillar" class="navbar-brand" style="width: 300px;"> <img class="background-image img-circle" src="@Url.Content("~/Content/img/caterpillar-pia-nacrtano-dobrasiva.jpg")" width="100%">  </a>
+
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse navHeaderCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li style="color:#f1700f">@if (Request.IsAuthenticated)
+                        { 
+                            <a style="color:#f1700f">Hi @User.Identity.Name.ToString() ! </a>
+                        }
+                    </li>
+                    <li class="active"><a href="home">Home</a></li>
+                    <li>@if (Request.IsAuthenticated)
+                        { 
+                            @Html.ActionLink("Log Out", "LogOff", "Account")
+                        }
+                        else 
+                        {
+                            @Html.ActionLink("Log In", "Login", "Account")
+                        }
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Facebook</a></li>
+                            <li><a href="#">Gooogle+</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact" data-toggle="modal">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="lijeviTab col-sm-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item" style="background-color: #f8b787;">
+                        <center>
+                            @{
+                              //  var StudentName = (ViewData["Admin"] as Caterpillar.Models.User).Name;
+                                //  var StudentSurname = (ViewData["Admin"] as Caterpillar.Models.User).Surname;
+
+                                var StudentName = Session["PrimljeniUser-Name"];
+                                var StudentSurname = Session["PrimljeniUser-Surname"];
+
+
+                                <h1 class="narancasto1bold" style="font-weight: bold">  @StudentName</h1>
+                                <h1 class="narancasto1bold" style="font-weight: bold">  @StudentSurname</h1>
+                            }
+
+                        </center>
+                    </a>
+                    <a href="../AdminUser" class="list-group-item">
+                        <center>
+                            Users
+                        </center>
+                    </a>
+                    <a href="../AdminRole" class="list-group-item">
+                        <center>
+                            Roles
+                        </center>
+                    </a>
+                    <a href="../AdminClass" class="list-group-item">
+                        <center>
+                            Classes
+                        </center>
+                    </a>
+                    <a href="../AdminCourse" class="list-group-item">
+                        <center>
+                            Courses
+
+                        </center>
+                    </a>
+                    <a href="../AdminTopic" class="list-group-item">
+                        <center>
+                            Topics
+                        </center>
+                    </a>
+                    <a href="../AdminCourseTopic" class="list-group-item">
+                        <center>
+                            Courses and topics
+                        </center>
+                    </a>
+                    <a href="../AdminClassTopic" class="list-group-item">
+                        <center>
+                            Classes and topics
+                        </center>
+                    </a>
+                    <a href="../AdminUserClassCourse" class="list-group-item">
+                        <center>
+                            Users, classes and coures
+                        </center>
+                    </a>
+                    <a href="../AdminKWLentry" class="list-group-item">
+                        <center>
+                            KWL entries
+                        </center>
+                    </a>
+
+                    <a href="../AdminResponse" class="list-group-item">
+                        <center>
+                            KWL Responses
+                        </center>
+                    </a>
+
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <!--		<div class = "navbar navbar-default navbar-fixed-bottom">
+                <div class = "container">
+                    <p class = "navbar-text pull-left">Site Built by Delan</p>
+                    <a class = "navbar-btn btn-danger btn pull-right">Subscribe on Youtube</a>
+                </div>
+            </div>
+    -->
+
+
+    <div class="modal fade" id="contact" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="form-horizontal">
+                    <div class="modal-header">
+                        <h4>Contact Caterpillar Support</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="contact-name" class="col-lg-2 control-label">Name:</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="contact-name" placeholder="Full name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email" class="col-lg-2 control-label">E-mail:</label>
+                            <div class="col-lg-10">
+                                <input type="email" class="form-control" id="contact-name2" placeholder="you@example.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message" class="col-lg-2 control-label">Name:</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="8"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="submit">Submit</button>
+                        <a class="btn btn-primary" data-dismiss="modal">Close</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

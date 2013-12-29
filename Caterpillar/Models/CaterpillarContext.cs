@@ -17,10 +17,11 @@ namespace Caterpillar.Models
         }
 
         public DbSet<Class> Classes { get; set; }
+        public DbSet<ClassTopic> ClassTopics { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseTopic> CourseTopics { get; set; }
-        public DbSet<IsResponseOn> IsResponseOns { get; set; }
         public DbSet<KWLentry> KWLentries { get; set; }
+        public DbSet<Response> Responses { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Topic> Topics { get; set; }
@@ -30,10 +31,11 @@ namespace Caterpillar.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new ClassMap());
+            modelBuilder.Configurations.Add(new ClassTopicMap());
             modelBuilder.Configurations.Add(new CourseMap());
             modelBuilder.Configurations.Add(new CourseTopicMap());
-            modelBuilder.Configurations.Add(new IsResponseOnMap());
             modelBuilder.Configurations.Add(new KWLentryMap());
+            modelBuilder.Configurations.Add(new ResponseMap());
             modelBuilder.Configurations.Add(new RoleMap());
             modelBuilder.Configurations.Add(new sysdiagramMap());
             modelBuilder.Configurations.Add(new TopicMap());

@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Caterpillar.Models;
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,7 @@
 <body>
     <div class="navbar navbar-default navbar-static-top">
         <div class="container">
-            <a href="Caterpillar" class="navbar-brand" style="width: 300px;"> <img class "background-image img-circle" src="@Url.Content("~/Content/img/caterpillar-pia-nacrtano-dobrasiva.jpg")" width="100%">  </a>
+            <a id="gusjenica" href="Caterpillar" class="navbar-brand" style="width: 300px;"> <img class="background-image img-circle" src="@Url.Content("~/Content/img/caterpillar-pia-nacrtano-dobrasiva.jpg")" width="100%">  </a>
 
 
             <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
@@ -32,13 +33,28 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName()  + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @*Html.ActionLink("Hello " + User.Identity.GetUserName()  + "!", "", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+
             <div class="collapse navbar-collapse navHeaderCollapse">
 
                 <ul class="nav navbar-nav navbar-right">
 
+                    <li style="color:#f1700f">
+                        @if (Request.IsAuthenticated)
+                        { 
+                            <a style="color:#f1700f">Hi @User.Identity.Name.ToString() ! </a>
+                        }
+                    </li>
                     <li class="active"><a href="home">Home</a></li>
-                    <li><a href="Account/Login">Login</a></li>
+                    <li>@if (Request.IsAuthenticated)
+                        { 
+                            @Html.ActionLink("Log Out", "LogOff", "Account")
+                        }
+                        else 
+                        {
+                            @Html.ActionLink("Log In", "Login", "Account")
+                        }
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -71,19 +87,19 @@
                     </a>
                     <a href="#" class="list-group-item">
                         <center>
-                            <img class "featuredImg img-circle" src="@Url.Content("~/Content/img/K2.JPG")" width="90%">
+                            <img class="featuredImg img-circle" src="@Url.Content("~/Content/img/K2.JPG")" width="90%">
 
                         </center>
                     </a>
                     <a href="#" class="list-group-item">
                         <center>
-                            <img class "featuredImg img-circle" src="@Url.Content("~/Content/img/W2.JPG")" width="90%">
+                            <img class="featuredImg img-circle" src="@Url.Content("~/Content/img/W2.JPG")" width="90%">
 
                         </center>
                     </a>
                     <a href="#" class="list-group-item">
                         <center>
-                            <img class "featuredImg img-circle" src="@Url.Content("~/Content/img/L2.JPG")" width="90%">
+                            <img class="featuredImg img-circle" src="@Url.Content("~/Content/img/L2.JPG")" width="90%">
 
                         </center>
                     </a>
@@ -98,11 +114,30 @@
             </div>
             <div class="lijeviTab col-sm-2">
                 <div class="list-group">
-                    <a href="#" class="list-group-item" style="background-color: #fdf0e7;">
-                        <center>
-                            <h1 class="list-group-item-heading">Main Menu</h1>
-                        </center>
-                    </a>
+                    @if ((Role)Session["PrimljeniUser-Role"] == null)
+                    {    
+                        <a href="#" class="list-group-item" style="background-color: #fdf0e7;">
+                            <center>
+                                <h1 class="list-group-item-heading">Main Menu</h1>
+                            </center>
+                        </a>
+                    }
+                    else if (((Role)Session["PrimljeniUser-Role"]).Name == "Administrator")
+                    {
+                         <a href="MainMenuAdmin" class="list-group-item" style="background-color: #fdf0e7;">
+                            <center>
+                                <h1 class="list-group-item-heading">Main Menu</h1>
+                            </center>
+                         </a>
+                    }
+                    else 
+                    {    
+                        <a href="#" class="list-group-item" style="background-color: #fdf0e7;">
+                            <center>
+                                <h1 class="list-group-item-heading">Main Menu</h1>
+                            </center>
+                        </a>
+                    }
                     <div class="list-group-item" style="background-color: #fad4b7;">
                         <center>
                             <h4 class="list-group-item-heading">Users:</h4>
@@ -139,8 +174,9 @@
                     <p class = "navbar-text pull-left">Site Built by Delan</p>
                     <a class = "navbar-btn btn-danger btn pull-right">Subscribe on Youtube</a>
                 </div>
+            </div>
     -->
-    </div>
+
 
     <div class="modal fade" id="contact" role="dialog">
         <div class="modal-dialog">
@@ -159,7 +195,7 @@
                         <div class="form-group">
                             <label for="contact-email" class="col-lg-2 control-label">E-mail:</label>
                             <div class="col-lg-10">
-                                <input type="email" class="form-control" id="contact-name" placeholder="you@example.com">
+                                <input type="email" class="form-control" id="contact-name2" placeholder="you@example.com">
                             </div>
                         </div>
                         <div class="form-group">

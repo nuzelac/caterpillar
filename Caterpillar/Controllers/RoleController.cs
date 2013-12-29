@@ -13,7 +13,6 @@ namespace Caterpillar.Controllers
     public class RoleController : Controller
     {
         private CaterpillarContext db = new CaterpillarContext();
-
         // GET: /Role/
         public ActionResult Index()
         {

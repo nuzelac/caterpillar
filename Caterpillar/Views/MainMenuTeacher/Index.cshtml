@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Caterpillar.Models.User>
+
+
+@using Microsoft.AspNet.Identity
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
+}
+
+<h2>Index</h2>
+
+
+@{
+    var TeacherName = (ViewData["Teacher"] as Caterpillar.Models.User).Name;
+    var TeacherSurname = (ViewData["Teacher"] as Caterpillar.Models.User).Surname;
+    <div>
+
+
+        @TeacherName
+        @TeacherSurname
+    </div>
+}
+
+
+<div>Subjects: </div>
+@foreach (var item in ViewData["Subjects"]
+            as List<Caterpillar.Models.UserClassCourse>)
+{
+    @item.Course.Name
+}
+
+
+<div>Topics: </div>
+@foreach (var item in ViewData["TopicsTOTAL"]
+                        as List<Caterpillar.Controllers.MainMenuTeacherController.UserTopicViewModel>)
+{
+    @item.Topic.Name
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            Class
+        </th>
+        <th>
+            Course
+        </th>
+        <th>
+            User
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewData["TeacherClassCourses"] as List<Caterpillar.Models.UserClassCourse>)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("ViewStudents", "ViewStudents", new { idClass = item.ClassId, idCourse = item.CourseId }) |
+                @Html.ActionLink("ViewTopics", "ViewTopics", new { idClass = item.ClassId, idCourse = item.CourseId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -8,114 +8,125 @@ using System.Web;
 using System.Web.Mvc;
 using Caterpillar.Models;
 
-namespace Caterpillar.Controllers
+namespace Gusjenica.Controllers
 {
-    public class QuestionsExampleController : Controller
+    public class AdminRoleController : Controller
     {
         private CaterpillarContext db = new CaterpillarContext();
 
-        // GET: /QuestionsExample/
+        // GET: /Role/
         public ActionResult Index()
         {
-            var kwlentries = db.KWLentries.Include(k => k.User);
-            return View(kwlentries.ToList());
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
+            return View(db.Roles.ToList());
         }
 
-        // GET: /QuestionsExample/Details/5
+        // GET: /Role/Details/5
         public ActionResult Details(int? id)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KWLentry kwlentry = db.KWLentries.Find(id);
-            if (kwlentry == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(kwlentry);
+            return View(role);
         }
 
-        // GET: /QuestionsExample/Create
+        // GET: /Role/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name");
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             return View();
         }
 
-        // POST: /QuestionsExample/Create
+        // POST: /Role/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,UserId")] KWLentry kwlentry)
+        public ActionResult Create([Bind(Include = "Id,Name")] Role role)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             if (ModelState.IsValid)
             {
-                db.KWLentries.Add(kwlentry);
+                db.Roles.Add(role);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", kwlentry.UserId);
-            return View(kwlentry);
+            return View(role);
         }
 
-        // GET: /QuestionsExample/Edit/5
+        // GET: /Role/Edit/5
         public ActionResult Edit(int? id)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KWLentry kwlentry = db.KWLentries.Find(id);
-            if (kwlentry == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", kwlentry.UserId);
-            return View(kwlentry);
+            return View(role);
         }
 
-        // POST: /QuestionsExample/Edit/5
+        // POST: /Role/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,UserId")] KWLentry kwlentry)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Role role)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             if (ModelState.IsValid)
             {
-                db.Entry(kwlentry).State = EntityState.Modified;
+                db.Entry(role).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Name", kwlentry.UserId);
-            return View(kwlentry);
+            return View(role);
         }
 
-        // GET: /QuestionsExample/Delete/5
+        // GET: /Role/Delete/5
         public ActionResult Delete(int? id)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            KWLentry kwlentry = db.KWLentries.Find(id);
-            if (kwlentry == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(kwlentry);
+            return View(role);
         }
 
-        // POST: /QuestionsExample/Delete/5
+        // POST: /Role/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            KWLentry kwlentry = db.KWLentries.Find(id);
-            db.KWLentries.Remove(kwlentry);
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
+            Role role = db.Roles.Find(id);
+            db.Roles.Remove(role);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

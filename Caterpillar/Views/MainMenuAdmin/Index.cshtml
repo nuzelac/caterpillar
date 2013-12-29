@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Caterpillar.Models.User>
+
+
+@using Microsoft.AspNet.Identity
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMainMenuAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+
+@{
+   // var AdminName = (ViewData["Admin"] as Gusjenica.Models.User).Name;
+    // var AdminSurname = (ViewData["Admin"] as Gusjenica.Models.User).Surname;
+    var AdminName = Session["PrimljeniUser-Name"];
+    var AdminSurname = Session["PrimljeniUser-Surname"];
+    <div>
+
+
+        @AdminName
+        @AdminSurname
+    </div>
+}

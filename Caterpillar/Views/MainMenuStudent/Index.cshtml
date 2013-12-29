@@ -1,0 +1,179 @@
+﻿@model IEnumerable<Caterpillar.Models.User>
+
+
+@using Microsoft.AspNet.Identity
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMainMenuStudentGore.cshtml";
+}
+
+<!-- <center><h2>Index</h2></center> -->
+
+@*
+        @{
+            var StudentName = (ViewData["Student"] as Caterpillar.Models.User).Name;
+            var StudentSurname = (ViewData["Student"] as Caterpillar.Models.User).Surname;
+            <div>
+
+
+                @StudentName
+                @StudentSurname
+            </div>
+        }
+
+        @foreach (var item in ViewData["KWLentries"]
+            as List<Caterpillar.Models.KWLentry>)
+        {
+
+            @item.Entry
+        }
+
+    <div>Subjects: </div>
+        @foreach (var item in ViewData["Subjects"]
+            as List<Caterpillar.Models.UserClassCourse>)
+        {
+            @item.Course.Name
+        }
+
+
+    <div>Topics: </div>
+            @foreach (var item in ViewData["Topics"]
+                        as List<Caterpillar.Models.UserTopicViewModel>)
+            {
+                @item.Topic.Name
+            }
+
+
+*@
+
+
+
+<div class="container">
+    <div class="row">
+        <div class=" col-sm-3">
+            <div class="list-group">
+
+                <a href="#" class="list-group-item">
+                    <center>
+                        <img class="featuredImg img-circle" src="img/photo.JPG" width="90%">
+
+                    </center>
+                </a>
+                <a href="#" class="list-group-item">
+                    <center>
+                        @{
+                            var StudentName = (ViewData["Student"] as Caterpillar.Models.User).Name;
+                            var StudentSurname = (ViewData["Student"] as Caterpillar.Models.User).Surname;
+
+
+
+                            <h1 class="narancasto1bold" style="font-weight: bold">  @StudentName</h1>
+                            <h1 class="narancasto1bold" style="font-weight: bold">  @StudentSurname</h1>
+
+                        }
+
+
+                    </center>
+                </a>
+
+            </div>
+        </div>
+
+
+        <div class="lijeviTab col-sm-7">
+            <div class="lijeviTab5 row">
+
+
+                <div class="lijeviTab1 col-sm-4 ">
+                    <center>
+                        <a href="CaterpillarK.html">
+                            <img src="img/topic-photo.JPG" class "img-circle" width="60%">
+                            <h4 class="crno1"> NameOfTheTopic1 </h4>
+                        </a>
+                    </center>
+                </div>
+                <div class="lijeviTab1 col-sm-4">
+                    <center>
+                        <a href="CaterpillarK.html">
+                            <img class "featuredImg img-circle" src="img/topic-photo.JPG" width="60%">
+                            <h4 class="crno1"> NameOfTheTopic2 </h4>
+                        </a>
+                    </center>
+                </div>
+                <div class="lijeviTab1 col-sm-4">
+                    <center>
+                        <a href="CaterpillarK.html">
+                            <img class "featuredImg img-circle" src="img/topic-photo.JPG" width="60%">
+                            <h4 class="crno1"> NameOfTheTopic3 </h4>
+                        </a>
+                    </center>
+                </div>
+
+
+
+            </div>
+
+            <div class="lijeviTab ">
+                <div class="lijeviTab3 col-sm-6">
+                    <div class="lijeviTab2 " style="background-color:#f6996c">
+                        <h2 class="bijelo1">Recent projects:</h2>
+                        <ul>
+                            @foreach (var item in ViewData["Topics"]
+                                as List<Caterpillar.Controllers.MainMenuStudentController.UserTopicViewModel>)
+                            {
+                                <li><a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1">  @item.Topic.Name </h4></a></li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="lijeviTab4 col-sm-6">
+                    <div class="lijeviTab2  " style="background-color:#f6996c">
+                        <h2 class="bijelo1">Teacher's reviews:</h2>
+                        <ul>
+                            <li>
+                                <a href="CaterpillarK.html"><img class="featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1"> NameOfTheTopic4 </h4> </a>
+                                <p class="text-right"> Well done<p>
+                            </li>
+                            <li>
+                                <a href="CaterpillarK.html"><img class="featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1"> NameOfTheTopic5 </h4> </a>
+                                <p class="text-right"> Not sufficient<p>
+                            </li>
+                            <li>
+                                <a href="CaterpillarK.html"><img class="featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1"> NameOfTheTopic6 </h4> </a>
+                                <p class="text-right"> Improvement is visible, bravo!<p>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="lijeviTab col-sm-2">
+            <div class="list-group" style="background-color: #ffffff;">
+
+                <h2 class="narancasto1bold"><center>Subjects:</center></h2>
+
+                <center>
+                    <ul>
+                        @foreach (var item in ViewData["Subjects"]
+                         as List<Caterpillar.Models.UserClassCourse>)
+                        {
+                            <li><a href="#"><h3 class="crno1"> @item.Course.Name</h3></a></li>
+                        }
+
+                    </ul>
+                    <center>
+            </div>
+
+        </div>
+    </div>
+</div>
+

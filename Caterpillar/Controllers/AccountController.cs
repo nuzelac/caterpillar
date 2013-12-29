@@ -15,6 +15,8 @@ namespace Caterpillar.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        public CaterpillarContext db = new CaterpillarContext();
+
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
@@ -52,7 +54,23 @@ namespace Caterpillar.Controllers
                 if (foundUsers.Count > 0)
                 {
                     System.Web.Security.FormsAuthentication.SetAuthCookie(foundUsers[0].UserName, true);
-                    System.Web.Security.FormsAuthentication.RedirectToLoginPage();
+                    string username = foundUsers[0].UserName;
+                    var currentUser = db.Users.Where(u => u.UserName == username).FirstOrDefault();
+                    Session["PrimljeniUser"] = currentUser;
+                    Session["PrimljeniUser-UserName"] = currentUser.UserName;
+                    Session["PrimljeniUser-Name"] = currentUser.Name;
+                    Session["PrimljeniUser-Surname"] = currentUser.Surname;
+                    Session["PrimljeniUser-Role"] = currentUser.Role;
+                    Session["PrimljeniUser-UserClassCourse"] = currentUser.UserClassCourses;
+                    Session["PrimljeniUser-KWLentry"] = currentUser.KWLentries;
+                    Session["PrimljeniUser-Response"] = currentUser.Responses;
+                    if (currentUser.Role.Name == "Administrator")
+                        return Redirect("../MainMenuAdmin");
+                    else if (currentUser.Role.Name == "Student")
+                        return Redirect("../MainMenuStudent");
+                    else if (currentUser.Role.Name == "Teacher")
+                        return Redirect("../MainMenuTeacher");
+                    else System.Web.Security.FormsAuthentication.RedirectToLoginPage();
                 }
                 else
                 {
@@ -288,11 +306,21 @@ namespace Caterpillar.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut();
+            System.Web.Security.FormsAuthentication.SignOut();
+            //AuthenticationManager.SignOut();
+            Session.Abandon();
+
+            // clear authentication cookie
+            HttpCookie cookie1 = new HttpCookie(System.Web.Security.FormsAuthentication.FormsCookieName, "");
+            cookie1.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(cookie1);
+
+            // clear session cookie (not necessary for your current problem but i would recommend you do it anyway)
+            HttpCookie cookie2 = new HttpCookie("ASP.NET_SessionId", "");
+            cookie2.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(cookie2);
             return RedirectToAction("Index", "Home");
         }
 
@@ -351,10 +379,12 @@ namespace Caterpillar.Controllers
 
         private bool HasPassword()
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
+            //var user = UserManager.FindById(User.Identity.GetUserId());
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             if (user != null)
             {
-                return user.PasswordHash != null;
+                //return user.PasswordHash != null;
+                return user.Password != null;
             }
             return false;
         }
