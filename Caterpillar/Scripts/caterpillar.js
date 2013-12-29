@@ -1,7 +1,12 @@
 ﻿$(function () {
+    var nodeType = {
+        HEAD: 0,
+        NORMAL: 1,
+        TAIL: 2
+    }
 
-    var addQuestion = function (q) {
-        nodes.unshift({ text: q, head: false, id: nodes.length });
+    var addQuestion = function (entry) {
+        nodes.unshift({ text: entry.entry, nodeType: nodeType.NORMAL, id: entry.id });
         if (nodes.length > 1) {
             links.push({ source: nodes[0], target: nodes[1] });
         }
@@ -10,13 +15,9 @@
     }
 
     var addHead = function () {
-        nodes.unshift({ text: "", head: true, id: nodes.length });
+        nodes.unshift({ text: "", nodeType: nodeType.HEAD, id: -1 });
         update();
     }
-
-    //setTimeout(function () {
-    //    addQuestion("teeest");
-    //}, 5000);
 
     var width = $('#caterpillar').width(),
       height = 800;
@@ -47,8 +48,6 @@
     var nodes = force.nodes();
     var links = force.links();
 
-
-
     var update = function () {
         var link = svg.selectAll(".link")
             .data(links);
@@ -73,7 +72,7 @@
         nodeEnter.append("circle")
               .attr("class", function (d) {
                   var classes = ["node"];
-                  if (d.head === true) {
+                  if (d.nodeType === nodeType.HEAD) {
                       classes.push("head");
                   }
                   return classes.join(" ");
@@ -100,7 +99,7 @@
               "font-size": "17px"
           })
             .html(function (d) {
-                if (d.head !== true)
+                if (d.nodeType !== nodeType.HEAD)
                     return d.text;
             });
 
@@ -111,12 +110,12 @@
                         .data(nodes, function (d) { return d.id });
 
         headBackgroundImage.enter().append("svg:image")
-                        .filter(function (d) { return d.head === true })
+                        .filter(function (d) { return d.nodeType === nodeType.HEAD })
                         .attr('class', 'head-img')
                         .attr('width', headRadius * 2)
                         .attr('height', headRadius * 2)
                         .attr("xlink:href", function (d) {
-                            if (d.head === true)
+                            if (d.nodeType === nodeType.HEAD)
                                 return "/Content/img/wurm3.svg";
                         })
 
@@ -126,7 +125,7 @@
                         .data(nodes, function (d) { return d.id });
 
         headTicalaImage.enter().append("svg:image")
-                        .filter(function (d) { return d.head === true })
+                        .filter(function (d) { return d.nodeType === nodeType.HEAD })
                         .attr('class', 'head-ticala-img')
                         .attr('width', headRadius * 2)
                         .attr('height', headRadius * 2)
@@ -136,7 +135,9 @@
 
         headTicalaImage.exit().remove();
 
-        node.on("click", function (e) {
+        node.on("click", function (d) {
+            console.log(d);
+            $('#kwl #tekst-pitanja').html(d.text);
             $('#kwl').modal('show');
         });
 

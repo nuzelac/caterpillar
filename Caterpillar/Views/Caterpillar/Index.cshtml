@@ -5,7 +5,15 @@
 }
 
 <script type="text/javascript">
-    var questions = [@Html.Raw(String.Join(",", Model.Select(s => "'" + s.Entry + "'")))];
+    var questions = [];
+
+    @foreach (var item in Model) {
+        @Html.Raw("questions.push({" +
+            "entry: '" + Html.DisplayFor((modelItem => item.Entry)) + "'," +
+            "id: '" + Html.DisplayFor((modelItem => item.Id)) + "'" +
+        "});\n");
+    }
+
 </script>
 
 <div id="caterpillar">
@@ -22,6 +30,7 @@
                     <div class="modal-header">
                         <h4>Pitanje</h4>
                     </div>
+                    <div id="tekst-pitanja"></div>
                     <table class="table">
                         <tr>
                             <th>
