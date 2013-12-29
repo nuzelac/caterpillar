@@ -63,6 +63,29 @@ namespace Caterpillar.Controllers
             return View(kwlentry);
         }
 
+        [HttpPost]
+        public ActionResult CreateNewResponse([Bind(Include = "EntryId,Response1")] Response response)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var trenutniUserName = User.Identity.Name.ToString();
+                System.Diagnostics.Debug.WriteLine(trenutniUserName);
+                var student = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
+
+                response.User = student;
+                
+                db.Responses.Add(response);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+
+            //ViewBag.EntryId = new SelectList(db.KWLentries, "Id", "Entry", response.EntryId);
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Name", response.UserId);
+            return PartialView("_NewResponseModal", response);
+        }
+
+
         // GET: /Caterpillar/Edit/5
         public ActionResult Edit(int? id)
         {

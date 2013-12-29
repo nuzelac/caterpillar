@@ -76,8 +76,24 @@
                 if (d3.event.defaultPrevented) return; // prevents onClick behavior on drag
 
                 if (d.nodeType === nodeType.NORMAL) {
+                    $('#new-response-submit').click(function (e) {
+                        e.preventDefault();
+                        console.log($('#new-response-form').serialize());
+                        
+                        $.post($('#new-response-form').attr('action'),
+                           $('#new-response-form').serialize(), 
+                           function (data, status, xhr) {
+                               if (data.success === true) {
+                                   $('#kwl').modal('hide');
+                               }
+                             // do something here with response;
+                           });
+                        
+                    });
+
                     $('#kwl #tekst-pitanja').html(d.text);
                     $('#kwl #question-id').val(d.id);
+                    $('#kwl #Response1').val('');
                     $('#kwl').modal('show');
                 } else if (d.nodeType === nodeType.TAIL) {
                     $('#kwl-new').modal('show');
