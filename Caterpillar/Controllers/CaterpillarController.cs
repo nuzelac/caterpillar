@@ -70,7 +70,6 @@ namespace Caterpillar.Controllers
             if (ModelState.IsValid)
             {
                 var trenutniUserName = User.Identity.Name.ToString();
-                System.Diagnostics.Debug.WriteLine(trenutniUserName);
                 var student = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
 
                 response.User = student;
@@ -80,8 +79,6 @@ namespace Caterpillar.Controllers
                 return Json(new { success = true });
             }
 
-            //ViewBag.EntryId = new SelectList(db.KWLentries, "Id", "Entry", response.EntryId);
-            //ViewBag.UserId = new SelectList(db.Users, "Id", "Name", response.UserId);
             return PartialView("_NewResponseModal", response);
         }
 
