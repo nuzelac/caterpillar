@@ -96,6 +96,21 @@
                     $('#kwl #Response1').val('');
                     $('#kwl').modal('show');
                 } else if (d.nodeType === nodeType.TAIL) {
+                    $('#new-entry-submit').click(function (e) {
+                        e.preventDefault();
+                        console.log($('#new-entry-form').serialize());
+
+                        $.post($('#new-entry-form').attr('action'),
+                           $('#new-entry-form').serialize(),
+                           function (data, status, xhr) {
+                               if (data.success === true) {
+                                   $('#kwl-new').modal('hide');
+                               }
+                               // do something here with response;
+                           });
+
+                    });
+                    $('#kwl-new #Entry').val('');
                     $('#kwl-new').modal('show');
                 }
             });

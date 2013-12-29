@@ -83,14 +83,16 @@ namespace Caterpillar.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateNewEntry([Bind(Include = "Entry")] KWLentry entry)
+        public ActionResult CreateNewEntry(string Entry)
         {
 
             if (ModelState.IsValid)
             {
+                var entry = new KWLentry();
                 var trenutniUserName = User.Identity.Name.ToString();
                 var student = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
 
+                entry.Entry = Entry;
                 entry.User = student;
                 entry.UserId = student.Id;
                 entry.Type = 0;
@@ -100,7 +102,7 @@ namespace Caterpillar.Controllers
                 return Json(new { success = true });
             }
 
-            return PartialView("_NewEntryModal", entry);
+            return PartialView("_NewEntryModal", Entry);
         }
 
 
