@@ -22,32 +22,7 @@
 GUMB KOJI OTVARA MODAL - SAMO ZA TEST
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#kwl"> ovdje </button>
 
-<div class="modal fade" id="kwl-new" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form class="form-horizontal">
-                <div class="modal-header">
-                    <h4>Novo pitanje</h4>
-                </div>
-               
-                <div class="modal-body">
-                    <div class="form-group">
-                        <p>Pitanje:</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-message" class="col-lg-2 control-label">Pitanje:</label>
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="8"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default" type="submit">Submit</button>
-                    <a class="btn btn-primary" data-dismiss="modal">Close</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 @Html.Partial("_NewResponseModal")
+
+@Html.Partial("_NewEntryModal")

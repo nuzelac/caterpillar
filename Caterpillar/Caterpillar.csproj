@@ -403,6 +403,7 @@
     <Content Include="Views\MainMenuTeacher\Edit.cshtml" />
     <Content Include="Views\MainMenuTeacher\Delete.cshtml" />
     <Content Include="Views\Caterpillar\_NewResponseModal.cshtml" />
+    <Content Include="Views\Caterpillar\_NewEntryModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -82,6 +82,27 @@ namespace Caterpillar.Controllers
             return PartialView("_NewResponseModal", response);
         }
 
+        [HttpPost]
+        public ActionResult CreateNewEntry([Bind(Include = "Entry")] KWLentry entry)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var trenutniUserName = User.Identity.Name.ToString();
+                var student = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
+
+                entry.User = student;
+                entry.UserId = student.Id;
+                entry.Type = 0;
+
+                db.KWLentries.Add(entry);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+
+            return PartialView("_NewEntryModal", entry);
+        }
+
 
         // GET: /Caterpillar/Edit/5
         public ActionResult Edit(int? id)
