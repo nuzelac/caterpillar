@@ -23,30 +23,59 @@
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#kwl"> ovdje </button>
 
 //MODAL ZA PITANJE
-<div class="modal fade" id="kwl" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form class="form-horizontal">
-                    <div class="modal-header">
-                        <h4>Pitanje</h4>
+<div class="modal fade" id="kwl-new" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <h4>Novo pitanje</h4>
+                </div>
+               
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p>Pitanje:</p>
                     </div>
-                    <div id="tekst-pitanja"></div>
-                    <input type="hidden" id="question-id" name="question-id" value="" />
-                    <table class="table">
-                        <tr>
-                            <th>
-                                Topic @Html.DisplayNameFor(model => model.Topic.Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.User.Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Entry)
-                            </th>
-                            <th></th>
-                        </tr>
+                    <div class="form-group">
+                        <label for="contact-message" class="col-lg-2 control-label">Pitanje:</label>
+                        <div class="col-lg-10">
+                            <textarea class="form-control" rows="8"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="submit">Submit</button>
+                    <a class="btn btn-primary" data-dismiss="modal">Close</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-                    @foreach (var item in Model) {
+<div class="modal fade" id="kwl" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal">
+                <div class="modal-header">
+                    <h4>Pitanje</h4>
+                </div>
+                <div id="tekst-pitanja"></div>
+                <input type="hidden" id="question-id" name="question-id" value="" />
+                <table class="table">
+                    <tr>
+                        <th>
+                            Topic @Html.DisplayNameFor(model => model.Topic.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.User.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Entry)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Topic.Name)
@@ -64,23 +93,23 @@
                     }
 
 
-                    </table>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <p>Odgovor:</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="contact-message" class="col-lg-2 control-label">Odgovor:</label>
-                            <div class="col-lg-10">
-                                <textarea class="form-control" rows="8"></textarea>
-                            </div>
+                </table>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p>Odgovor:</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message" class="col-lg-2 control-label">Odgovor:</label>
+                        <div class="col-lg-10">
+                            <textarea class="form-control" rows="8"></textarea>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" type="submit">Submit</button>
-                        <a class="btn btn-primary" data-dismiss="modal">Close</a>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="submit">Submit</button>
+                    <a class="btn btn-primary" data-dismiss="modal">Close</a>
+                </div>
+            </form>
         </div>
     </div>
+</div>

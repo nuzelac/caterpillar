@@ -10,12 +10,19 @@
         if (nodes.length > 1) {
             links.push({ source: nodes[0], target: nodes[1] });
         }
-        // console.log(nodes);
         update();
     }
 
     var addHead = function () {
         nodes.unshift({ text: "", nodeType: nodeType.HEAD, id: -1 });
+        update();
+    }
+
+    var addTail = function () {
+        nodes.unshift({ text: "", nodeType: nodeType.TAIL, id: -2 });
+        if (nodes.length > 1) {
+            links.push({ source: nodes[0], target: nodes[1] });
+        }
         update();
     }
 
@@ -60,8 +67,22 @@
 
         var node = svg.selectAll("g")
                    .attr("class", "nodes")
-                   .data(nodes, function (d) { return d.id; })
-                   .on("click", function (d, i) { alert("Hello world"); });
+                   .data(nodes, function (d) { return d.id; });
+
+        node
+            .on("click", function (d) {
+                console.log(d);
+
+                if (d3.event.defaultPrevented) return; // prevents onClick behavior on drag
+
+                if (d.nodeType === nodeType.NORMAL) {
+                    $('#kwl #tekst-pitanja').html(d.text);
+                    $('#kwl #question-id').val(d.id);
+                    $('#kwl').modal('show');
+                } else if (d.nodeType === nodeType.TAIL) {
+                    $('#kwl-new').modal('show');
+                }
+            });
 
         var nodeEnter = node.enter()
                    // Add one g element for each data node here.
@@ -75,10 +96,12 @@
                   if (d.nodeType === nodeType.HEAD) {
                       classes.push("head");
                   }
+                  if (d.nodeType === nodeType.TAIL) {
+                      classes.push("tail");
+                  }
                   return classes.join(" ");
               })
-              .attr("r", 70)
-              .style("fill", "#fde0c8");
+              .attr("r", 70);
         ;
 
         var w = 90;
@@ -115,8 +138,7 @@
                         .attr('width', headRadius * 2)
                         .attr('height', headRadius * 2)
                         .attr("xlink:href", function (d) {
-                            if (d.nodeType === nodeType.HEAD)
-                                return "/Content/img/wurm3.svg";
+                            return "/Content/img/wurm3.svg";
                         })
 
         headBackgroundImage.exit().remove();
@@ -134,13 +156,6 @@
                         })
 
         headTicalaImage.exit().remove();
-
-        node.on("click", function (d) {
-            console.log(d);
-            $('#kwl #tekst-pitanja').html(d.text);
-            $('#kwl #question-id').val(d.id);
-            $('#kwl').modal('show');
-        });
 
         force.on("tick", function (e) {
 
@@ -172,5 +187,7 @@
     for (i in questions) {
         addQuestion(questions[i]);
     }
+    addTail();
 
+    update();
 });
