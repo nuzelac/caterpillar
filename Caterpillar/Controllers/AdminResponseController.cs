@@ -17,6 +17,8 @@ namespace Caterpillar.Controllers
         // GET: /AdminResponse/
         public ActionResult Index()
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             var responses = db.Responses.Include(r => r.KWLentry).Include(r => r.User);
             return View(responses.ToList());
         }
@@ -66,6 +68,8 @@ namespace Caterpillar.Controllers
         // GET: /AdminResponse/Edit/5
         public ActionResult Edit(int? id)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,6 +91,8 @@ namespace Caterpillar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="Id,EntryId,UserId,Response1,Correction,Points")] Response response)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             if (ModelState.IsValid)
             {
                 db.Entry(response).State = EntityState.Modified;

@@ -17,6 +17,8 @@ namespace Gusjenica.Controllers
         // GET: /Class/
         public ActionResult Index()
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             var StudentName = Session["PrimljeniUser-Name"];
             var StudentSurname = Session["PrimljeniUser-Surname"];
             return View(db.Classes.ToList());

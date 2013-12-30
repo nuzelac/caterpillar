@@ -66,11 +66,12 @@
                               //  var StudentName = (ViewData["Teacher"] as Caterpillar.Models.User).Name;
                                 //  var StudentSurname = (ViewData["Teacher"] as Caterpillar.Models.User).Surname;
 
+                                var teacher = (User)ViewData["Teacher"];
                                 var StudentName = Session["PrimljeniUser-Name"];
                                 var StudentSurname = Session["PrimljeniUser-Surname"];
 
-                                <h1 class="narancasto1bold" style="font-weight: bold">  @StudentName</h1>
-                                <h1 class="narancasto1bold" style="font-weight: bold">  @StudentSurname</h1>
+                                <h1 class="narancasto1bold" style="font-weight: bold">  @teacher.Name</h1>
+                                <h1 class="narancasto1bold" style="font-weight: bold">  @teacher.Surname</h1>
                             }
 
                         </center>

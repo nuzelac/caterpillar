@@ -43,7 +43,6 @@ namespace Caterpillar.Controllers
 			var currentAdmin = UserManager.FindByIdAsync(User.Identity.GetUserId());
 			var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
 			ViewData["Admin"] = admin;
-			ViewData["Admin"] = Session["PrimljeniUser"];
 
 
 

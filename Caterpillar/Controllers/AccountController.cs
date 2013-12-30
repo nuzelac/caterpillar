@@ -68,7 +68,7 @@ namespace Caterpillar.Controllers
                     Session["PrimljeniUser-KWLentry"] = currentUser.KWLentries;
                     Session["PrimljeniUser-Response"] = currentUser.Responses;
                     //dodatno
-                    var authTicket = new System.Web.Security.FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.Now.AddMinutes(20), true, currentUser.Role.Name);
+                    var authTicket = new System.Web.Security.FormsAuthenticationTicket(1, username, DateTime.Now, DateTime.MaxValue, true, currentUser.Role.Name);
                     string encryptedTicket = System.Web.Security.FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(System.Web.Security.FormsAuthentication.FormsCookieName, encryptedTicket);
                     HttpContext.Response.Cookies.Add(authCookie);

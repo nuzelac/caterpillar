@@ -114,7 +114,7 @@
             </div>
             <div class="lijeviTab col-sm-2">
                 <div class="list-group">
-                    @if ((Role)Session["PrimljeniUser-Role"] == null)
+                    @if (User == null)
                     {    
                         <a href="#" class="list-group-item" style="background-color: #fdf0e7;">
                             <center>

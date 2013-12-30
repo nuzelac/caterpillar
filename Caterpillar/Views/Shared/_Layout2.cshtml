@@ -36,7 +36,22 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li class="active"><a href="#">Home</a></li>
+                    <li style="color:#f1700f">
+                        @if (Request.IsAuthenticated)
+                        { 
+                            <a style="color:#f1700f">Hi @User.Identity.Name.ToString() ! </a>
+                        }
+                    </li>
+                    <li class="active"><a href="../Home">Home</a></li>
+                    <li>@if (Request.IsAuthenticated)
+                        { 
+                            @Html.ActionLink("Log Out", "LogOff", "Account")
+                        }
+                        else 
+                        {
+                            @Html.ActionLink("Log In", "Login", "Account")
+                        }
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media<b class="caret"></b></a>
                         <ul class="dropdown-menu">
