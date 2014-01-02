@@ -78,26 +78,30 @@
                 <div class="list-group">
                     <a href="#" class="list-group-item" style="background-color: #f8b787;">
                         <center>
+                            @if (Session["OdabraniTopicId"] != null) { 
+                                CaterpillarContext db = new CaterpillarContext();
+                                var topic = db.Topics.Find((int)Session["OdabraniTopicId"]);
+                                
+                                <h1 class="list-group-item-heading">@topic.Name</h1>
 
-                            <h1 class="list-group-item-heading">Current Topic</h1>
-
-                            <p class="list-group-item-text">start: DD/MM/YYYY</p>
-                            <p class="list-group-item-text">start: DD/MM/YYYY</p>
+                                <p class="list-group-item-text">start: @topic.StartDate</p>
+                                <p class="list-group-item-text">end: @topic.EndDate</p>                            
+                            }
                         </center>
                     </a>
-                    <a href="#" class="list-group-item">
+                    <a href="@Url.Action("K", "Caterpillar")" class="list-group-item">
                         <center>
                             <img class="featuredImg img-circle" src="@Url.Content("~/Content/img/K2.JPG")" width="90%">
 
                         </center>
                     </a>
-                    <a href="#" class="list-group-item">
+                    <a href="@Url.Action("W", "Caterpillar")" class="list-group-item">
                         <center>
                             <img class="featuredImg img-circle" src="@Url.Content("~/Content/img/W2.JPG")" width="90%">
 
                         </center>
                     </a>
-                    <a href="#" class="list-group-item">
+                    <a href="@Url.Action("L", "Caterpillar")" class="list-group-item">
                         <center>
                             <img class="featuredImg img-circle" src="@Url.Content("~/Content/img/L2.JPG")" width="90%">
 

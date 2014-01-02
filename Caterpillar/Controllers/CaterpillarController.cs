@@ -40,9 +40,13 @@ namespace Caterpillar.Controllers
 
         public ActionResult K()
         {
-            // @TODO: ako u sessionu ne postoji odabrani topic, redirectaj na main menu?
+            object obj = Session["OdabraniTopicId"];
+            if (obj == null)
+            {
+                return RedirectToAction("Index", "MainMenuStudent");
+            }
 
-            int idTopic = (int)Session["OdabraniTopicId"];
+            int idTopic = (int)obj;
 			var kwlentries = db.KWLentries.Include(k => k.Topic).Include(k => k.User).Where(u => u.TopicId == idTopic && u.Type == 1);
 
 			return View(kwlentries.ToList());
@@ -50,9 +54,13 @@ namespace Caterpillar.Controllers
 
         public ActionResult W()
         {
-            // @TODO: ako u sessionu ne postoji odabrani topic, redirectaj na main menu?
+            object obj = Session["OdabraniTopicId"];
+            if (obj == null)
+            {
+                return RedirectToAction("Index", "MainMenuStudent");
+            }
 
-            int idTopic = (int)Session["OdabraniTopicId"];
+            int idTopic = (int)obj;
             var kwlentries = db.KWLentries.Include(k => k.Topic).Include(k => k.User).Where(u => u.TopicId == idTopic && u.Type == 0);
 
             return View(kwlentries.ToList());
@@ -60,9 +68,13 @@ namespace Caterpillar.Controllers
 
         public ActionResult L()
         {
-            // @TODO: ako u sessionu ne postoji odabrani topic, redirectaj na main menu?
+            object obj = Session["OdabraniTopicId"];
+            if (obj == null)
+            {
+                return RedirectToAction("Index", "MainMenuStudent");
+            }
 
-            int idTopic = (int)Session["OdabraniTopicId"];
+            int idTopic = (int)obj;
             var responses = db.Responses.Include(k => k.KWLentry.Topic).Include(k => k.User).Where(u => u.KWLentry.TopicId == idTopic && u.KWLentry.Type == 0);
 
             return View(responses.ToList());
