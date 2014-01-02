@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "ViewResponses";
     Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
+    int idClass = (int)ViewData["PrimljeniClassId"];
+    int idCourse = (int)ViewData["PrimljeniCourseId"];
+    int idTopic = (int)ViewData["PrimljeniTopicId"];
 }
 
 <h2>Responses</h2>
@@ -59,9 +62,9 @@
             }
         </td>
         <td>
-            @Html.ActionLink("Evaluate", "EvaluateResponse", new { id=item.Id}) |
-            @Html.ActionLink("Edit", "EditResponse", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "DeleteResponse", new { id=item.Id })
+            @Html.ActionLink("Evaluate", "EvaluateResponse", new { id=item.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"]}) |
+            @Html.ActionLink("Edit", "EditResponse", new { id=item.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] }) |
+            @Html.ActionLink("Delete", "DeleteResponse", new { id=item.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] })
         </td>
     </tr>
 }

@@ -40,7 +40,8 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "EditEntry", new { id = item.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] }) |
-            @Html.ActionLink("Delete", "DeleteEntry", new { id = item.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] })
+            @Html.ActionLink("Delete", "DeleteEntry", new { id = item.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] }) |
+            @Html.ActionLink("Add Response", "AddResponse", new { id = item.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] })
         </td>
     </tr>
 }

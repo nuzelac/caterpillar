@@ -414,6 +414,7 @@
     <Content Include="Views\MainMenuTeacher\EditResponse.cshtml" />
     <Content Include="Views\MainMenuTeacher\DeleteResponse.cshtml" />
     <Content Include="Views\MainMenuTeacher\EvaluateResponse.cshtml" />
+    <Content Include="Views\MainMenuTeacher\AddResponse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

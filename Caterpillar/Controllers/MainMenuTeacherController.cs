@@ -154,13 +154,13 @@ namespace Caterpillar.Controllers
 		}
 
 		// GET: /Topic/Edit/5
-        public ActionResult EditTopic(int? id, int? idClass, int? idCourse)
+		public ActionResult EditTopic(int? id, int? idClass, int? idCourse)
 		{
 			var trenutniUserName = User.Identity.Name;
 			var teacher = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
 			Session["Teacher"] = teacher;
-            ViewData["PrimljeniClassId"] = idClass;
-            ViewData["PrimljeniCourseId"] = idCourse;
+			ViewData["PrimljeniClassId"] = idClass;
+			ViewData["PrimljeniCourseId"] = idCourse;
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -178,7 +178,7 @@ namespace Caterpillar.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-        public ActionResult EditTopic([Bind(Include = "Id,Name,CourseId")] Topic topic, int? idClass, int? idCourse)
+		public ActionResult EditTopic([Bind(Include = "Id,Name,CourseId")] Topic topic, int? idClass, int? idCourse)
 		{
 			var trenutniUserName = User.Identity.Name;
 			var teacher = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
@@ -188,19 +188,19 @@ namespace Caterpillar.Controllers
 			{
 				db.Entry(topic).State = EntityState.Modified;
 				db.SaveChanges();
-                return RedirectToAction("ViewTopics", new { idClass = (int)idClass, idCourse = (int)idCourse });
+				return RedirectToAction("ViewTopics", new { idClass = (int)idClass, idCourse = (int)idCourse });
 			}
 			return View(topic);
 		}
 
 		// GET: /Topic/Delete/5
-        public ActionResult DeleteTopic(int? id, int? idClass, int? idCourse)
+		public ActionResult DeleteTopic(int? id, int? idClass, int? idCourse)
 		{
 			var trenutniUserName = User.Identity.Name;
 			var teacher = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
 			Session["Teacher"] = teacher;
-            ViewData["PrimljeniClassId"] = idClass;
-            ViewData["PrimljeniCourseId"] = idCourse;
+			ViewData["PrimljeniClassId"] = idClass;
+			ViewData["PrimljeniCourseId"] = idCourse;
 
 			if (id == null)
 			{
@@ -235,7 +235,7 @@ namespace Caterpillar.Controllers
 			}
 			db.Topics.Remove(topic);
 			db.SaveChanges();
-            return RedirectToAction("ViewTopics", new { idClass = (int)idClass, idCourse = (int)idCourse });
+			return RedirectToAction("ViewTopics", new { idClass = (int)idClass, idCourse = (int)idCourse });
 		}
 
 		// GET: /Topic/Create
@@ -425,7 +425,7 @@ namespace Caterpillar.Controllers
 		// POST: /Entry/Delete/5
 		[HttpPost, ActionName("DeleteEntry")]
 		[ValidateAntiForgeryToken]
-        public ActionResult DeleteEntryConfirmed(int id, int? idClass, int? idCourse, int? idTopic)
+		public ActionResult DeleteEntryConfirmed(int id, int? idClass, int? idCourse, int? idTopic)
 		{
 			KWLentry kwlentry = db.KWLentries.Find(id);
 			List<Response> responses = db.Responses.Where(u => u.EntryId == id).ToList();
@@ -447,7 +447,7 @@ namespace Caterpillar.Controllers
 			return View(responses.ToList());
 		}
 
-		public ActionResult EditResponse(int? id)
+		public ActionResult EditResponse(int? id, int? idClass, int? idCourse, int? idTopic)
 		{
 			if (id == null)
 			{
@@ -458,6 +458,9 @@ namespace Caterpillar.Controllers
 			{
 				return HttpNotFound();
 			}
+			ViewData["PrimljeniClassId"] = idClass;
+			ViewData["PrimljeniCourseId"] = idCourse;
+			ViewData["PrimljeniTopicId"] = idTopic;
 			ViewBag.Entry = db.KWLentries.Where(u => u.Id == response.EntryId).FirstOrDefault().Entry;
 			return View(response);
 		}
@@ -467,20 +470,23 @@ namespace Caterpillar.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult EditResponse([Bind(Include = "Id,EntryId,UserId,Response1,Correction,Points")] Response response)
+		public ActionResult EditResponse([Bind(Include = "Id,EntryId,UserId,Response1,Correction,Points")] Response response, int? idClass, int? idCourse, int? idTopic)
 		{
 			if (ModelState.IsValid)
 			{
 				db.Entry(response).State = EntityState.Modified;
 				db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("ViewResponses", new { idClass = (int)idClass, idCourse = (int)idCourse, idTopic = (int)idTopic });
 			}
+			ViewData["PrimljeniClassId"] = idClass;
+			ViewData["PrimljeniCourseId"] = idCourse;
+			ViewData["PrimljeniTopicId"] = idTopic;
 			ViewBag.Entry = db.KWLentries.Where(u => u.Id == response.EntryId).FirstOrDefault().Entry;
 			return View(response);
 		}
 
 		// GET: /Default1/Delete/5
-		public ActionResult DeleteResponse(int? id)
+		public ActionResult DeleteResponse(int? id, int? idClass, int? idCourse, int? idTopic)
 		{
 			if (id == null)
 			{
@@ -491,21 +497,24 @@ namespace Caterpillar.Controllers
 			{
 				return HttpNotFound();
 			}
+			ViewData["PrimljeniClassId"] = idClass;
+			ViewData["PrimljeniCourseId"] = idCourse;
+			ViewData["PrimljeniTopicId"] = idTopic;
 			return View(response);
 		}
 
 		// POST: /Default1/Delete/5
 		[HttpPost, ActionName("DeleteResponse")]
 		[ValidateAntiForgeryToken]
-		public ActionResult DeleteResponseConfirmed(int id)
+		public ActionResult DeleteResponseConfirmed(int id, int? idClass, int? idCourse, int? idTopic)
 		{
 			Response response = db.Responses.Find(id);
 			db.Responses.Remove(response);
 			db.SaveChanges();
-			return RedirectToAction("Index");
+			return RedirectToAction("ViewResponses", new { idClass = (int)idClass, idCourse = (int)idCourse, idTopic = (int)idTopic });
 		}
 
-		public ActionResult EvaluateResponse(int? id)
+		public ActionResult EvaluateResponse(int? id, int? idClass, int? idCourse, int? idTopic)
 		{
 			if (id == null)
 			{
@@ -516,6 +525,9 @@ namespace Caterpillar.Controllers
 			{
 				return HttpNotFound();
 			}
+			ViewData["PrimljeniClassId"] = idClass;
+			ViewData["PrimljeniCourseId"] = idCourse;
+			ViewData["PrimljeniTopicId"] = idTopic;
 			ViewBag.Entry = db.KWLentries.Where(u => u.Id == response.EntryId).FirstOrDefault().Entry;
 			return View(response);
 		}
@@ -525,16 +537,50 @@ namespace Caterpillar.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult EvaluateResponse([Bind(Include = "Id,EntryId,UserId,Response1,Correction,Points")] Response response)
+		public ActionResult EvaluateResponse([Bind(Include = "Id,EntryId,UserId,Response1,Correction,Points")] Response response, int? idClass, int? idCourse, int? idTopic)
 		{
 			if (ModelState.IsValid)
 			{
 				response.Correction = 1;
 				db.Entry(response).State = EntityState.Modified;
 				db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("ViewResponses", new { idClass = (int)idClass, idCourse = (int)idCourse, idTopic = (int)idTopic });
 			}
+			ViewData["PrimljeniClassId"] = idClass;
+			ViewData["PrimljeniCourseId"] = idCourse;
+			ViewData["PrimljeniTopicId"] = idTopic;
 			ViewBag.Entry = db.KWLentries.Where(u => u.Id == response.EntryId).FirstOrDefault().Entry;
+			return View(response);
+		}
+
+		// GET: /Default1/Create
+		public ActionResult AddResponse(int? id, int? idClass, int? idCourse, int? idTopic)
+		{
+			var response = new Response();
+			response.EntryId = (int)id;
+			response.UserId = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
+			ViewData["PrimljeniClassId"] = idClass;
+			ViewData["PrimljeniCourseId"] = idCourse;
+			ViewData["PrimljeniTopicId"] = idTopic;
+			return View(response);
+		}
+
+		// POST: /Default1/Create
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult AddResponse([Bind(Include = "Id,EntryId,UserId,Response1,Correction,Points")] Response response, int? idClass, int? idCourse, int? idTopic)
+		{
+			if (ModelState.IsValid)
+			{
+				db.Responses.Add(response);
+				db.SaveChanges();
+				return RedirectToAction("ViewEntries", new { idClass = (int)idClass, idCourse = (int)idCourse, idTopic = (int)idTopic });
+			}
+			ViewData["PrimljeniClassId"] = idClass;
+			ViewData["PrimljeniCourseId"] = idCourse;
+			ViewData["PrimljeniTopicId"] = idTopic;
 			return View(response);
 		}
 	}

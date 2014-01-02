@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "DeleteResponse";
     Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
+    int idClass = (int)ViewData["PrimljeniClassId"];
+    int idCourse = (int)ViewData["PrimljeniCourseId"];
+    int idTopic = (int)ViewData["PrimljeniTopicId"];
 }
 
 <h2>DeleteResponse</h2>
@@ -59,7 +62,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "ViewResponses", new { idClass = (int)idClass, idCourse = (int)idCourse, idTopic = (int)idTopic })
         </div>
     }
 </div>
