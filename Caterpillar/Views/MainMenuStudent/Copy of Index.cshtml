@@ -50,7 +50,7 @@
 
 
 
-<div class="container" style="background-color:#e8e8e8">
+<div class="container">
     <div class="row">
         <div class=" col-sm-3">
             <div class="list-group">
@@ -85,36 +85,46 @@
         </div>
 
 
-        <div class="lijeviTab">
-            <div class="lijeviTab9 col-sm-9">
+        <div class="lijeviTab col-sm-7">
+            <div class="lijeviTab5 row">
 
 
-                <div class="list-group" style="background-color: #f6996c;">
+                <div class="lijeviTab1 col-sm-4 ">
                     <center>
-                        <h2 class="bijelo1"><center>My Classes:</center></h2>
-                        <br />
-                            @foreach (var item in ViewData["Subjects"]
-                             as List<Caterpillar.Models.UserClassCourse>)
-                            {
-                                <!-- <a href="#"><h3 class="crno1"><center>@item.Course.Name</center></h3></a> -->
-                                <center>@Html.ActionLink(@item.Course.Name, "ViewTopics", new { idClass=(int)item.ClassId, idCourse=(int)item.CourseId }, new { @class="h3 crno1" })</center>
-                                <br />
-                            }
+                        <a href="CaterpillarK.html">
+                            <img src="img/topic-photo.JPG" class "img-circle" width="60%">
+                            <h4 class="crno1"> NameOfTheTopic1 </h4>
+                        </a>
                     </center>
                 </div>
-            </div>
+                <div class="lijeviTab1 col-sm-4">
+                    <center>
+                        <a href="CaterpillarK.html">
+                            <img class "featuredImg img-circle" src="img/topic-photo.JPG" width="60%">
+                            <h4 class="crno1"> NameOfTheTopic2 </h4>
+                        </a>
+                    </center>
+                </div>
+                <div class="lijeviTab1 col-sm-4">
+                    <center>
+                        <a href="CaterpillarK.html">
+                            <img class "featuredImg img-circle" src="img/topic-photo.JPG" width="60%">
+                            <h4 class="crno1"> NameOfTheTopic3 </h4>
+                        </a>
+                    </center>
+                </div>
 
 
 
             </div>
 
-            <div class="lijeviTab">
-                <div class="lijeviTab3 col-sm-4">
+            <div class="lijeviTab ">
+                <div class="lijeviTab3 col-sm-6">
                     <div class="lijeviTab2 " style="background-color:#f6996c">
-                        <h2 class="bijelo1">My Topics:</h2>
+                        <h2 class="bijelo1">Recent projects:</h2>
                         <ul>
-                            @foreach (var item in ViewData["StudentTopics"]
-                                as List<Caterpillar.Models.ClassTopic>)
+                            @foreach (var item in ViewData["Topics"]
+                                as List<Caterpillar.Controllers.MainMenuStudentController.UserTopicViewModel>)
                             {
                                 <!--<li><a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1">  @item.Topic.Name </h4></a></li> -->
                                 <li><a href="#"> <h4 class="crno1">  @item.Topic.Name </h4></a></li>
@@ -123,8 +133,7 @@
                         </ul>
                     </div>
                 </div>
-                </div>
-                <div class="lijeviTab4 col-sm-5">
+                <div class="lijeviTab4 col-sm-6">
                     <div class="lijeviTab2  " style="background-color:#f6996c">
                         <h2 class="bijelo1">Teacher's reviews:</h2>
                         <ul>
@@ -146,9 +155,29 @@
                 </div>
 
 
+            </div>
+
         </div>
 
 
+        <div class="lijeviTab col-sm-2">
+            <div class="list-group" style="background-color: #ffffff;">
+
+                <h2 class="narancasto1bold"><center>Subjects:</center></h2>
+
+                <center>
+                    <ul>
+                        @foreach (var item in ViewData["Subjects"]
+                         as List<Caterpillar.Models.UserClassCourse>)
+                        {
+                            <li><a href="#"><h3 class="crno1"> @item.Course.Name</h3></a></li>
+                        }
+
+                    </ul>
+                    <center>
+            </div>
+
+        </div>
         @foreach (var item in ViewData["Subjects"] as List<Caterpillar.Models.UserClassCourse>)
     {
         <tr>
@@ -176,4 +205,5 @@
         </tr>
     }
     </div>
+</div>
 

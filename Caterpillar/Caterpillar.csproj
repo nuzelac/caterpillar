@@ -415,6 +415,8 @@
     <Content Include="Views\MainMenuTeacher\DeleteResponse.cshtml" />
     <Content Include="Views\MainMenuTeacher\EvaluateResponse.cshtml" />
     <Content Include="Views\MainMenuTeacher\AddResponse.cshtml" />
+    <Content Include="Views\MainMenuStudent\Copy of Index.cshtml" />
+    <Content Include="Views\MainMenuStudent\ViewTopics.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

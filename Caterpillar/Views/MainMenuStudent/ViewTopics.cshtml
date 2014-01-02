@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Caterpillar.Controllers.MainMenuStudentController.TOPICSClassCourseViewModel>
+
+@{
+	ViewBag.Title = "ViewTopics";
+}
+
+<h2>Topics</h2>
+
+<table class="table">
+	<tr>
+
+		<th>
+			Topic Name
+		</th>
+
+		<th></th>
+	</tr>
+
+   @foreach (var item in ViewData["Topics"] as List<Caterpillar.Controllers.MainMenuStudentController.TOPICSClassCourseViewModel>)
+	{
+		<tr>
+
+			<td>
+				@Html.DisplayFor(modelItem => item.Topic.Name)
+			</td>
+			<!-- <td>
+				@Html.ActionLink("View Student Entries", "ViewEntries", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = item.Topic.Id }) |
+				@Html.ActionLink("View Student Responses", "ViewResponses", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = item.Topic.Id }) |
+				@Html.ActionLink("Edit", "EditTopic", new { id = item.Topic.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"] }) |
+				@Html.ActionLink("Delete", "DeleteTopic", new { id = item.Topic.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"] })
+			</td> -->
+		</tr>
+	}
+
+</table>
+<p>
+	@Html.ActionLink("Back to List", "Index")
+</p>
+

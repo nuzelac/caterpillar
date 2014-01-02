@@ -42,6 +42,11 @@ namespace Caterpillar.Controllers
 			public Topic Topic { get; set; }
 		}
 
+        public class TOPICSClassCourseViewModel
+        {
+            public Topic Topic { get; set; }
+        }
+
 		public ActionResult Index()
 		{
 			//   var currentUMUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
@@ -87,6 +92,38 @@ namespace Caterpillar.Controllers
 
 			return View();
 		}
+
+        public ActionResult ViewTopics(int? idClass, int? idCourse)
+        {
+            var trenutniUserName = User.Identity.Name;
+            var student = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
+            Session["Student"] = student;
+            ViewData["PrimljeniClassId"] = idClass;
+            ViewData["PrimljeniCourseId"] = idCourse;
+
+            if (idClass == null || idCourse == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var topics = from a in db.ClassTopics
+                         join b in db.CourseTopics
+                         on a.TopicId equals b.TopicId
+                         where a.ClassId == idClass && b.CourseId == idCourse
+                         select new TOPICSClassCourseViewModel
+                         {
+                            Topic = b.Topic
+                         };
+            
+
+            //     var usersOfClassCourse = db.UserClassCourse.Select( s => s.ClassId== idClass);
+            // ViewData["Topics"] = topicsOfClassCourse.Distinct().ToList();
+            ViewData["Topics"] = topics.Distinct().ToList();
+            if (topics == null)
+            {
+                return HttpNotFound();
+            }
+            return View(topics);
+
+        }
 
 
 	}

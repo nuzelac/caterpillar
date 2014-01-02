@@ -129,10 +129,10 @@ namespace Caterpillar.Controllers
 			if (idClass == null || idCourse == null)
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-			var topicsOfClassCourse = from a in db.UserClassCourses
+			var topicsOfClassCourse = from a in db.ClassTopics
 									  join b in db.CourseTopics
-									  on a.CourseId equals b.CourseId
-									  where a.CourseId == idCourse && a.ClassId == idClass
+									  on a.TopicId equals b.TopicId
+									  where a.ClassId == idClass && b.CourseId == idCourse
 
 									  select new TOPICSClassCourseViewModel
 									  {
