@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Caterpillar.Models.KWLentry>
+
+@{
+    ViewBag.Title = "ViewEntries";
+    Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
+}
+
+<h2>Entries</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Topic.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Entry)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Topic.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Entry)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditEntry", new { id = item.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] }) |
+            @Html.ActionLink("Delete", "DeleteEntry", new { id = item.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] })
+        </td>
+    </tr>
+}
+</table>
+
+<p>
+
+
+    @Html.ActionLink("Create New Entry", "CreateNewEntry", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] }) |
+    @Html.ActionLink("Back to List", "ViewTopics", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"] } )
+</p>

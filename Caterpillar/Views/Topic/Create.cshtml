@@ -1,4 +1,5 @@
-﻿@model Caterpillar.Models.Topic
+﻿@using Caterpillar.Models
+@model Topic
 
 @{
     ViewBag.Title = "Create";
@@ -22,6 +23,15 @@
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id, "CourseId", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Id", string.Empty)
+                @Html.ValidationMessageFor(model => model.Id)
+            </div>
+        </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

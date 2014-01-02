@@ -63,14 +63,17 @@
                 </a>
                 <a href="#" class="list-group-item">
                     <center>
-                        @{
-                            var StudentName = (ViewData["Student"] as Caterpillar.Models.User).Name;
-                            var StudentSurname = (ViewData["Student"] as Caterpillar.Models.User).Surname;
+                        @if (Session["Student"] != null)
+                        {
+                            var StudentName = (Session["Student"] as Caterpillar.Models.User).Name;
+                            var StudentSurname = (Session["Student"] as Caterpillar.Models.User).Surname;
+                            var StudentClass = (Session["Class"] as Caterpillar.Models.Class);
 
 
 
                             <h1 class="narancasto1bold" style="font-weight: bold">  @StudentName</h1>
                             <h1 class="narancasto1bold" style="font-weight: bold">  @StudentSurname</h1>
+                            <h1 class="narancasto1bold" style="font-weight: bold">  @StudentClass.Name</h1>
 
                         }
 
@@ -123,7 +126,8 @@
                             @foreach (var item in ViewData["Topics"]
                                 as List<Caterpillar.Controllers.MainMenuStudentController.UserTopicViewModel>)
                             {
-                                <li><a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1">  @item.Topic.Name </h4></a></li>
+                                <!--<li><a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1">  @item.Topic.Name </h4></a></li> -->
+                                <li><a href="#"> <h4 class="crno1">  @item.Topic.Name </h4></a></li>
                             }
 
                         </ul>
@@ -174,6 +178,32 @@
             </div>
 
         </div>
+        @foreach (var item in ViewData["Subjects"] as List<Caterpillar.Models.UserClassCourse>)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class.Name)
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+        @foreach (var item in ViewData["StudentTopics"] as List<Caterpillar.Models.ClassTopic>)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Class.Name)
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
     </div>
 </div>
 

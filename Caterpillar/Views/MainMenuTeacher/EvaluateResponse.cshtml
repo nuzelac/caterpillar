@@ -1,0 +1,48 @@
+﻿@model Caterpillar.Models.Response
+
+@{
+    ViewBag.Title = "EditResponse";
+    Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
+}
+
+<h2>EditResponse</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Response</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.EntryId)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.Response1)
+        @Html.HiddenFor(model => model.Correction)
+
+        <h4>Entry:</h4>
+        <p>@ViewBag.Entry</p>
+
+        <h4>Response:</h4>
+        <p>@Model.Response1</p>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Points, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Points)
+                @Html.ValidationMessageFor(model => model.Points)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

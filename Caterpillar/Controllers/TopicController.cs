@@ -38,6 +38,8 @@ namespace Caterpillar.Controllers
         // GET: /Topic/Create
         public ActionResult Create()
         {
+            ViewBag.Id = new SelectList(db.Courses, "Id", "Name");
+            //ViewBag.Class = new SelectList(db.Classes, "Id", "Name");
             return View();
         }
 
@@ -46,14 +48,24 @@ namespace Caterpillar.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Name")] Topic topic)
+        public ActionResult Create([Bind(Include = "Id,Name")] Topic topic)
         {
             if (ModelState.IsValid)
             {
+                //var pom = ViewBag.Class;
+                var coursetopic = new CourseTopic();
+                coursetopic.CourseId = topic.Id;
+                topic.Id = 0;
+                var vrijeme = DateTime.Now;
+                topic.StartDate = vrijeme;
                 db.Topics.Add(topic);
+                db.SaveChanges();
+                coursetopic.TopicId = db.Topics.Where(m => m.StartDate == vrijeme).FirstOrDefault().Id;
+                db.CourseTopics.Add(coursetopic);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Id = new SelectList(db.Courses, "Id", "Name", topic.Id);
 
             return View(topic);
         }

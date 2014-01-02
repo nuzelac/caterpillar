@@ -13,6 +13,7 @@ namespace Caterpillar.Controllers
     public class AdminResponseController : Controller
     {
         private CaterpillarContext db = new CaterpillarContext();
+        
 
         // GET: /AdminResponse/
         public ActionResult Index()
@@ -26,6 +27,8 @@ namespace Caterpillar.Controllers
         // GET: /AdminResponse/Details/5
         public ActionResult Details(int? id)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -41,6 +44,8 @@ namespace Caterpillar.Controllers
         // GET: /AdminResponse/Create
         public ActionResult Create()
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             ViewBag.EntryId = new SelectList(db.KWLentries, "Id", "Entry");
             ViewBag.UserId = new SelectList(db.Users, "Id", "Name");
             return View();
@@ -53,6 +58,8 @@ namespace Caterpillar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Id,EntryId,UserId,Response1,Correction,Points")] Response response)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             if (ModelState.IsValid)
             {
                 db.Responses.Add(response);
@@ -107,6 +114,8 @@ namespace Caterpillar.Controllers
         // GET: /AdminResponse/Delete/5
         public ActionResult Delete(int? id)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -124,6 +133,8 @@ namespace Caterpillar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewData["Admin"] = admin;
             Response response = db.Responses.Find(id);
             db.Responses.Remove(response);
             db.SaveChanges();

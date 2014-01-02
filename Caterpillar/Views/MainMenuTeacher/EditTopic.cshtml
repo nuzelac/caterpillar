@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
+    int idClass = (int)ViewData["PrimljeniClassId"];
+    int idCourse = (int)ViewData["PrimljeniCourseId"];
 }
 
 <h2>Edit</h2>
@@ -37,7 +39,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "ViewTopics")
+    @Html.ActionLink("Back to List", "ViewTopics", new { idClass = idClass, idCourse = idCourse } )
 </div>
 
 @section Scripts {

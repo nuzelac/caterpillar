@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Caterpillar.Models.Response>
+
+@{
+    ViewBag.Title = "ViewResponses";
+    Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
+}
+
+<h2>Responses</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.KWLentry.Entry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Response1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Correction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Points)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.KWLentry.Entry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Response1)
+        </td>
+        <td>
+            @if (item.Correction == 0) 
+            {
+                <p>-</p>
+            }
+            else if (item.Correction == 1)
+            { 
+                <p>+</p>
+            }
+        </td>
+        <td>
+            @if (item.Points == 0)
+            { 
+                <p>False</p>
+            }
+            else
+            {
+                @Html.DisplayFor(modelItem => item.Points)
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Evaluate", "EvaluateResponse", new { id=item.Id}) |
+            @Html.ActionLink("Edit", "EditResponse", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeleteResponse", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+

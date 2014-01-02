@@ -52,9 +52,17 @@ namespace Caterpillar.Controllers
 			var currentstudent = UserManager.FindByIdAsync(User.Identity.GetUserId());
 			// Task<System.Web.Mvc.ActionResult> currentstudent = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 			//if (User.Identity==null||User.Identity.Name=="")
-			var trenutniUserName = (string)Session["PrimljeniUser-UserName"];
+			var trenutniUserName = User.Identity.Name;
 			var student = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
-			ViewData["Student"] = student;
+			Session["Student"] = student;
+			var studentClassCourses = db.UserClassCourses.Where(u => u.UserId == student.Id).ToList();
+			var studentClass = studentClassCourses[0].Class;
+			Session["Class"] = studentClass;
+			List<Course> studentCourses = new List<Course>();
+			foreach (var elem in studentClassCourses)
+			{
+				studentCourses.Add(elem.Course);
+			}
 
 
 			//var kwlentries = student.KWLentries;
@@ -62,7 +70,7 @@ namespace Caterpillar.Controllers
 
 			var subjects = student.UserClassCourses;
 			ViewData["Subjects"] = subjects.ToList();
-
+			
 			var topics = from a in subjects.ToList()
 						 join b in db.CourseTopics
 						 on a.CourseId equals b.CourseId
@@ -70,8 +78,12 @@ namespace Caterpillar.Controllers
 						 {
 							 Topic = b.Topic
 						 };
+			
+			var studentTopics = db.ClassTopics.Where(u => u.ClassId == studentClass.Id).ToList();
+
 
 			ViewData["Topics"] = topics.ToList();
+			ViewData["StudentTopics"] = studentTopics;
 
 			return View();
 		}

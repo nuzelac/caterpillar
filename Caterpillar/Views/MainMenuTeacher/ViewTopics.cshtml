@@ -5,8 +5,7 @@
     Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
 }
 
-<h2>Details</h2>
-
+<h2>Topics</h2>
 
 <table class="table">
     <tr>
@@ -26,9 +25,10 @@
                 @Html.DisplayFor(modelItem => item.Topic.Name)
             </td>
             <td>
-                @Html.ActionLink("ViewStudentsEnteries", "ViewStudentsEnteries", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniClassId"], idTopic = item.Topic.Id }) |
-                @Html.ActionLink("Edit", "Edit", new { id = item.Topic.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Topic.Id })
+                @Html.ActionLink("View Student Entries", "ViewEntries", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = item.Topic.Id }) |
+                @Html.ActionLink("View Student Responses", "ViewResponses", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = item.Topic.Id }) |
+                @Html.ActionLink("Edit", "EditTopic", new { id = item.Topic.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"] }) |
+                @Html.ActionLink("Delete", "DeleteTopic", new { id = item.Topic.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"] })
             </td>
         </tr>
     }
@@ -37,6 +37,7 @@
 <p>
 
 
-    @Html.ActionLink("CreateNewTopic", "CreateNewTopic", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniClassId"] }) |
+    @Html.ActionLink("Create New Topic", "CreateNewTopic", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"] }) |
+    @Html.ActionLink("Add Existing Topic", "AddExistingTopic", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"] }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -65,7 +65,7 @@
                             @{
                               //  var StudentName = (ViewData["Admin"] as Caterpillar.Models.User).Name;
                                 //  var StudentSurname = (ViewData["Admin"] as Caterpillar.Models.User).Surname;
-                                var admin = (User)ViewData["Admin"];
+                                var admin = (User)Session["Admin"];
                                 var StudentName = Session["PrimljeniUser-Name"];
                                 var StudentSurname = Session["PrimljeniUser-Surname"];
 

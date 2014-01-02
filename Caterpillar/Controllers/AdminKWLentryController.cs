@@ -46,6 +46,7 @@ namespace Gusjenica.Controllers
             var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             ViewData["Admin"] = admin;
             ViewBag.UserId = new SelectList(db.Users, "Id", "Name");
+            ViewBag.TopicId = new SelectList(db.Topics, "Id", "Name");
             return View();
         }
 
@@ -66,6 +67,7 @@ namespace Gusjenica.Controllers
             }
 
             ViewBag.UserId = new SelectList(db.Users, "Id", "Name", kwlentry.UserId);
+            ViewBag.TopicId = new SelectList(db.Topics, "Id", "Name", kwlentry.TopicId);
             return View(kwlentry);
         }
 
@@ -84,6 +86,7 @@ namespace Gusjenica.Controllers
                 return HttpNotFound();
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Name", kwlentry.UserId);
+            ViewBag.TopicId = new SelectList(db.Topics, "Id", "Name", kwlentry.TopicId);
             return View(kwlentry);
         }
 
@@ -103,6 +106,7 @@ namespace Gusjenica.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Name", kwlentry.UserId);
+            ViewBag.TopicId = new SelectList(db.Topics, "Id", "Name", kwlentry.TopicId);
             return View(kwlentry);
         }
 

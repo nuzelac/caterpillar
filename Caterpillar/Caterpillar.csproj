@@ -400,10 +400,20 @@
     <Content Include="Views\MainMenuTeacher\Index.cshtml" />
     <Content Include="Views\MainMenuTeacher\ViewStudents.cshtml" />
     <Content Include="Views\MainMenuTeacher\ViewTopics.cshtml" />
-    <Content Include="Views\MainMenuTeacher\Edit.cshtml" />
-    <Content Include="Views\MainMenuTeacher\Delete.cshtml" />
+    <Content Include="Views\MainMenuTeacher\EditTopic.cshtml" />
+    <Content Include="Views\MainMenuTeacher\DeleteTopic.cshtml" />
     <Content Include="Views\Caterpillar\_NewResponseModal.cshtml" />
     <Content Include="Views\Caterpillar\_NewEntryModal.cshtml" />
+    <Content Include="Views\MainMenuTeacher\CreateNewTopic.cshtml" />
+    <Content Include="Views\MainMenuTeacher\AddExistingTopic.cshtml" />
+    <Content Include="Views\MainMenuTeacher\ViewEntries.cshtml" />
+    <Content Include="Views\MainMenuTeacher\CreateNewEntry.cshtml" />
+    <Content Include="Views\MainMenuTeacher\EditEntry.cshtml" />
+    <Content Include="Views\MainMenuTeacher\DeleteEntry.cshtml" />
+    <Content Include="Views\MainMenuTeacher\ViewResponses.cshtml" />
+    <Content Include="Views\MainMenuTeacher\EditResponse.cshtml" />
+    <Content Include="Views\MainMenuTeacher\DeleteResponse.cshtml" />
+    <Content Include="Views\MainMenuTeacher\EvaluateResponse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
