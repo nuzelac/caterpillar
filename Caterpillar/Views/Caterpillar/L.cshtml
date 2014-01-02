@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Caterpillar.Models.Response>
+
+@{
+    ViewBag.Title = "L";
+}
+
+<script type="text/javascript">
+    var questions = [];
+
+    @foreach (var item in Model) {
+        @Html.Raw("questions.push({" +
+            "entry: '" + Html.DisplayFor((modelItem => item.Response1)) + "'," +
+            "id: '" + Html.DisplayFor((modelItem => item.Id)) + "'" +
+        "});\n");
+    }
+
+    jQuery(function () {
+        caterpillar('#caterpillar', {
+            tailOnClick: false, // or function()
+            nodeOnClick: false
+        });
+    });
+</script>
+
+<div id="caterpillar">
+</div>

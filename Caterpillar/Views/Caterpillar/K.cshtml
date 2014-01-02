@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Caterpillar.Models.KWLentry>
+
+@{
+    ViewBag.Title = "K";
+}
+
+<script type="text/javascript">
+    var questions = [];
+
+    @foreach (var item in Model) {
+        @Html.Raw("questions.push({" +
+            "entry: '" + Html.DisplayFor((modelItem => item.Entry)) + "'," +
+            "id: '" + Html.DisplayFor((modelItem => item.Id)) + "'" +
+        "});\n");
+    }
+
+    jQuery(function () {
+        caterpillar('#caterpillar', {
+            tailOnClick: function (d) {
+                console.log(this);
+                
+                $('#new-entry-submit').off('click');
+                $('#new-entry-submit').click(function (e) {
+                    e.preventDefault();
+
+                    $.post($('#new-entry-form').attr('action'),
+                       $('#new-entry-form').serialize(),
+                       function (data, status, xhr) {
+                           if (data.success === true) {
+                               $('#kwl-new').modal('hide');
+                               window.removeLast();
+                               window.update();
+
+                               window.addQuestion({
+                                   entry: data.entry,
+                                   id: data.id
+                               })
+
+                               window.addTail();
+                               window.update();
+                           }
+                           // do something here with response;
+                       });
+
+                    return false;
+                });
+                $('#kwl-new #Entry').val('');
+                $('#kwl-new').modal('show');
+            }, // or function()
+            nodeOnClick: false
+        });
+    });
+</script>
+
+<div id="caterpillar">
+</div>
+
+@Html.Partial("_NewKEntryModal")

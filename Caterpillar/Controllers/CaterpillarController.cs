@@ -38,6 +38,36 @@ namespace Caterpillar.Controllers
             return View(kwlentry);
         }
 
+        public ActionResult K()
+        {
+            // @TODO: ako u sessionu ne postoji odabrani topic, redirectaj na main menu?
+
+            int idTopic = (int)Session["OdabraniTopicId"];
+			var kwlentries = db.KWLentries.Include(k => k.Topic).Include(k => k.User).Where(u => u.TopicId == idTopic && u.Type == 1);
+
+			return View(kwlentries.ToList());
+        }
+
+        public ActionResult W()
+        {
+            // @TODO: ako u sessionu ne postoji odabrani topic, redirectaj na main menu?
+
+            int idTopic = (int)Session["OdabraniTopicId"];
+            var kwlentries = db.KWLentries.Include(k => k.Topic).Include(k => k.User).Where(u => u.TopicId == idTopic && u.Type == 0);
+
+            return View(kwlentries.ToList());
+        }
+
+        public ActionResult L()
+        {
+            // @TODO: ako u sessionu ne postoji odabrani topic, redirectaj na main menu?
+
+            int idTopic = (int)Session["OdabraniTopicId"];
+            var responses = db.Responses.Include(k => k.KWLentry.Topic).Include(k => k.User).Where(u => u.KWLentry.TopicId == idTopic && u.KWLentry.Type == 0);
+
+            return View(responses.ToList());
+        }
+
         // GET: /Caterpillar/Create
         public ActionResult Create()
         {
@@ -93,16 +123,41 @@ namespace Caterpillar.Controllers
                 var student = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
 
                 entry.Entry = Entry;
+                entry.TopicId = (int)Session["OdabraniTopicId"];
                 entry.User = student;
                 entry.UserId = student.Id;
                 entry.Type = 0;
 
                 db.KWLentries.Add(entry);
                 db.SaveChanges();
-                return Json(new { success = true });
+                return Json(new { success = true, id = entry.Id, entry = entry.Entry });
             }
 
             return PartialView("_NewEntryModal", Entry);
+        }
+
+        [HttpPost]
+        public ActionResult CreateNewKEntry(string Entry)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var entry = new KWLentry();
+                var trenutniUserName = User.Identity.Name.ToString();
+                var student = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
+
+                entry.Entry = Entry;
+                entry.TopicId = (int)Session["OdabraniTopicId"];
+                entry.User = student;
+                entry.UserId = student.Id;
+                entry.Type = 1;
+
+                db.KWLentries.Add(entry);
+                db.SaveChanges();
+                return Json(new { success = true, id = entry.Id, entry = entry.Entry });
+            }
+
+            return PartialView("_NewKEntryModal", Entry);
         }
 
 

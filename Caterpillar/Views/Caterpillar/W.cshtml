@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Caterpillar.Models.KWLentry>
+
+@{
+    ViewBag.Title = "W";
+}
+
+<script type="text/javascript">
+    var questions = [];
+
+    @foreach (var item in Model) {
+        @Html.Raw("questions.push({" +
+            "entry: '" + Html.DisplayFor((modelItem => item.Entry)) + "'," +
+            "id: '" + Html.DisplayFor((modelItem => item.Id)) + "'" +
+        "});\n");
+    }
+
+    jQuery(function () {
+        caterpillar('#caterpillar', {
+            tailOnClick: function (d) {
+                console.log(this);
+
+                $('#new-entry-submit').off('click');
+                $('#new-entry-submit').click(function (e) {
+                    e.preventDefault();
+
+                    $.post($('#new-entry-form').attr('action'),
+                       $('#new-entry-form').serialize(),
+                       function (data, status, xhr) {
+                           if (data.success === true) {
+                               $('#kwl-new').modal('hide');
+                               window.removeLast();
+                               window.update();
+
+                               window.addQuestion({
+                                   entry: data.entry,
+                                   id: data.id
+                               })
+
+                               window.addTail();
+                               window.update();
+                           }
+                           // do something here with response;
+                       });
+
+                    return false;
+                });
+                $('#kwl-new #Entry').val('');
+                $('#kwl-new').modal('show');
+            }, // or function()
+            nodeOnClick: function (d) {
+                $('#new-response-submit').off('click');
+                $('#new-response-submit').click(function (e) {
+                    e.preventDefault();
+
+                    $.post($('#new-response-form').attr('action'),
+                       $('#new-response-form').serialize(), 
+                       function (data, status, xhr) {
+                           if (data.success === true) {
+                               $('#kwl').modal('hide');
+                           }
+                         // do something here with response;
+                       });
+
+                    return false;
+                });
+
+                $('#kwl #tekst-pitanja').html(d.text);
+                $('#kwl #question-id').val(d.id);
+                $('#kwl #Response1').val('');
+                $('#kwl').modal('show');
+            }
+        });
+    });
+</script>
+
+<div id="caterpillar">
+</div>
+
+@Html.Partial("_NewResponseModal")
+
+@Html.Partial("_NewEntryModal")

@@ -125,6 +125,12 @@ namespace Caterpillar.Controllers
 
         }
 
+        public ActionResult SelectTopic(int? idClass, int? idCourse, int? idTopic)
+        {
+            Session["OdabraniTopicId"] = idTopic;
+            return RedirectToAction("K", "Caterpillar");
+        }
+
 
 	}
 }

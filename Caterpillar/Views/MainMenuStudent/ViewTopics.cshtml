@@ -23,8 +23,10 @@
 			<td>
 				@Html.DisplayFor(modelItem => item.Topic.Name)
 			</td>
-			<!-- <td>
-				@Html.ActionLink("View Student Entries", "ViewEntries", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = item.Topic.Id }) |
+            <td>
+                @Html.ActionLink("Select topic", "SelectTopic", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = item.Topic.Id })
+            </td>
+            <!-- <td>
 				@Html.ActionLink("View Student Responses", "ViewResponses", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = item.Topic.Id }) |
 				@Html.ActionLink("Edit", "EditTopic", new { id = item.Topic.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"] }) |
 				@Html.ActionLink("Delete", "DeleteTopic", new { id = item.Topic.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"] })

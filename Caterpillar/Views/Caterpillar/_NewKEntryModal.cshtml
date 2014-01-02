@@ -1,0 +1,24 @@
+﻿<div class="modal fade" id="kwl-new" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" id="new-entry-form" action="@Url.Action("CreateNewKEntry")">
+                <div class="modal-header">
+                    <h4>Nova činjenica</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="contact-message" class="col-lg-2 control-label">Činjenica:</label>
+                        <div class="col-lg-10">
+                            <textarea class="form-control" rows="8" name="Entry" id="Entry"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" id="new-entry-submit" type="submit">Submit</button>
+                    <a class="btn btn-primary" data-dismiss="modal">Close</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

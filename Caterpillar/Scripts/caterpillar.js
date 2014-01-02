@@ -1,11 +1,11 @@
-﻿$(function () {
-    var nodeType = {
+﻿function caterpillar(selector, options) {
+    window.nodeType = {
         HEAD: 0,
         NORMAL: 1,
         TAIL: 2
     }
 
-    var addQuestion = function (entry) {
+    window.addQuestion = function (entry) {
         nodes.unshift({ text: entry.entry, nodeType: nodeType.NORMAL, id: entry.id });
         if (nodes.length > 1) {
             links.push({ source: nodes[0], target: nodes[1] });
@@ -13,12 +13,12 @@
         update();
     }
 
-    var addHead = function () {
+    window.addHead = function () {
         nodes.unshift({ text: "", nodeType: nodeType.HEAD, id: -1 });
         update();
     }
 
-    var addTail = function () {
+    window.addTail = function () {
         nodes.unshift({ text: "", nodeType: nodeType.TAIL, id: -2 });
         if (nodes.length > 1) {
             links.push({ source: nodes[0], target: nodes[1] });
@@ -26,22 +26,28 @@
         update();
     }
 
-    var width = $('#caterpillar').width(),
+    window.removeLast = function () {
+        nodes.shift();
+        links.pop();
+        update();
+    }
+
+    window.width = $(selector).width(),
       height = 800;
 
-    var color = d3.scale.category20();
+    window.color = d3.scale.category20();
 
-    var force = d3.layout.force()
+    window.force = d3.layout.force()
         .charge(-1400)
         .linkDistance(100)
         .size([width, height]);
 
-    var svg = d3.select("#caterpillar").append("svg")
+    window.svg = d3.select(selector).append("svg")
         .attr("width", width)
         .attr("height", height)
         .attr("id", "caterpillar-svg");
 
-    var chart = $("#caterpillar-svg"),
+    window.chart = $("#caterpillar-svg"),
         aspect = chart.width() / chart.height(),
         container = chart.parent();
 
@@ -49,13 +55,13 @@
         var targetWidth = container.width();
         chart.attr("width", targetWidth);
         chart.attr("height", Math.round(targetWidth / aspect));
-        force.size([$('#caterpillar').width(), height]);
+        force.size([$(selector).width(), height]);
     }).trigger("resize");
 
-    var nodes = force.nodes();
-    var links = force.links();
+    window.nodes = force.nodes();
+    window.links = force.links();
 
-    var update = function () {
+    window.update = function () {
         var link = svg.selectAll(".link")
             .data(links);
 
@@ -71,47 +77,50 @@
 
         node
             .on("click", function (d) {
-                console.log(d);
-
                 if (d3.event.defaultPrevented) return; // prevents onClick behavior on drag
 
                 if (d.nodeType === nodeType.NORMAL) {
-                    $('#new-response-submit').click(function (e) {
-                        e.preventDefault();
-                        console.log($('#new-response-form').serialize());
+                    if (options.nodeOnClick != false)
+                        (options.nodeOnClick).call(self, d);
+                    //$('#new-response-submit').click(function (e) {
+                    //    e.preventDefault();
+                    //    console.log($('#new-response-form').serialize());
                         
-                        $.post($('#new-response-form').attr('action'),
-                           $('#new-response-form').serialize(), 
-                           function (data, status, xhr) {
-                               if (data.success === true) {
-                                   $('#kwl').modal('hide');
-                               }
-                             // do something here with response;
-                           });
+                    //    $.post($('#new-response-form').attr('action'),
+                    //       $('#new-response-form').serialize(), 
+                    //       function (data, status, xhr) {
+                    //           if (data.success === true) {
+                    //               $('#kwl').modal('hide');
+                    //           }
+                    //         // do something here with response;
+                    //       });
                         
-                    });
+                    //});
 
-                    $('#kwl #tekst-pitanja').html(d.text);
-                    $('#kwl #question-id').val(d.id);
-                    $('#kwl #Response1').val('');
-                    $('#kwl').modal('show');
+                    //$('#kwl #tekst-pitanja').html(d.text);
+                    //$('#kwl #question-id').val(d.id);
+                    //$('#kwl #Response1').val('');
+                    //$('#kwl').modal('show');
                 } else if (d.nodeType === nodeType.TAIL) {
-                    $('#new-entry-submit').click(function (e) {
-                        e.preventDefault();
-                        console.log($('#new-entry-form').serialize());
+                    if (options.tailOnClick != false)
+                        (options.tailOnClick).call(self, d);
 
-                        $.post($('#new-entry-form').attr('action'),
-                           $('#new-entry-form').serialize(),
-                           function (data, status, xhr) {
-                               if (data.success === true) {
-                                   $('#kwl-new').modal('hide');
-                               }
-                               // do something here with response;
-                           });
+                    //$('#new-entry-submit').click(function (e) {
+                    //    e.preventDefault();
+                    //    console.log($('#new-entry-form').serialize());
 
-                    });
-                    $('#kwl-new #Entry').val('');
-                    $('#kwl-new').modal('show');
+                    //    $.post($('#new-entry-form').attr('action'),
+                    //       $('#new-entry-form').serialize(),
+                    //       function (data, status, xhr) {
+                    //           if (data.success === true) {
+                    //               $('#kwl-new').modal('hide');
+                    //           }
+                    //           // do something here with response;
+                    //       });
+
+                    //});
+                    //$('#kwl-new #Entry').val('');
+                    //$('#kwl-new').modal('show');
                 }
             });
 
@@ -212,13 +221,13 @@
         node.order();
     };
 
-    update();
+    window.update();
 
-    addHead();
+    window.addHead();
     for (i in questions) {
-        addQuestion(questions[i]);
+        window.addQuestion(questions[i]);
     }
-    addTail();
+    window.addTail();
 
-    update();
-});
+    window.update();
+};

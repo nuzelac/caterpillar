@@ -417,6 +417,11 @@
     <Content Include="Views\MainMenuTeacher\AddResponse.cshtml" />
     <Content Include="Views\MainMenuStudent\Copy of Index.cshtml" />
     <Content Include="Views\MainMenuStudent\ViewTopics.cshtml" />
+    <Content Include="Views\Caterpillar\K.cshtml" />
+    <Content Include="Views\Caterpillar\NewKEntryModal.cshtml" />
+    <Content Include="Views\Caterpillar\_NewKEntryModal.cshtml" />
+    <Content Include="Views\Caterpillar\W.cshtml" />
+    <Content Include="Views\Caterpillar\L.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
