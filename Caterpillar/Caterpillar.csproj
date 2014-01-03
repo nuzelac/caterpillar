@@ -422,6 +422,7 @@
     <Content Include="Views\Caterpillar\_NewKEntryModal.cshtml" />
     <Content Include="Views\Caterpillar\W.cshtml" />
     <Content Include="Views\Caterpillar\L.cshtml" />
+    <Content Include="Views\Caterpillar\_ShowResponseModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

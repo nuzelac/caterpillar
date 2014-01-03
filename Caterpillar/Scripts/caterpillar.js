@@ -7,6 +7,15 @@
 
     window.addQuestion = function (entry) {
         nodes.unshift({ text: entry.entry, nodeType: nodeType.NORMAL, id: entry.id });
+        if (entry.hasOwnProperty('question')) {
+            nodes[0].question = entry.question;
+        }
+        if (entry.hasOwnProperty('correction')) {
+            nodes[0].correction = entry.correction;
+        }
+        if (entry.hasOwnProperty('points')) {
+            nodes[0].points = entry.points;
+        }
         if (nodes.length > 1) {
             links.push({ source: nodes[0], target: nodes[1] });
         }

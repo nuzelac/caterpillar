@@ -10,6 +10,9 @@
     @foreach (var item in Model) {
         @Html.Raw("questions.push({" +
             "entry: '" + Html.DisplayFor((modelItem => item.Response1)) + "'," +
+            "question: '" + Html.DisplayFor((modelItem => item.KWLentry.Entry)) + "'," +
+            "correction: '" + Html.DisplayFor((modelItem => item.Correction)) + "'," +
+            "points: '" + Html.DisplayFor((modelItem => item.Points)) + "'," +                             
             "id: '" + Html.DisplayFor((modelItem => item.Id)) + "'" +
         "});\n");
     }
@@ -17,10 +20,25 @@
     jQuery(function () {
         caterpillar('#caterpillar', {
             tailOnClick: false, // or function()
-            nodeOnClick: false
+            nodeOnClick: function (d) {
+                $('#kwl #tekst-pitanja').html(d.question);
+                $('#kwl #question-id').val(d.id);
+                $('#kwl #tekst-odgovora').html(d.text);
+                if (d.correction == 1) {
+                    $('#kwl #tekst-ocijenjeno').html("da");
+                    $('#kwl #tekst-bodovi').html(d.points);
+                } else {
+                    $('#kwl #tekst-ocijenjeno').html("ne");
+                    $('#kwl #tekst-bodovi').html("-");
+                }
+                $('#kwl').modal('show');
+            }
         });
     });
 </script>
 
 <div id="caterpillar">
 </div>
+
+
+@Html.Partial("_ShowResponseModal")
