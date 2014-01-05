@@ -113,8 +113,8 @@
                     <div class="lijeviTab2 " style="background-color:#f6996c">
                         <h2 class="bijelo1">My Topics:</h2>
                         <ul>
-                            @foreach (var item in ViewData["StudentTopics"]
-                                as List<Caterpillar.Models.ClassTopic>)
+                            @foreach (var item in ViewData["Topics"]
+                                as List<Caterpillar.Controllers.MainMenuStudentController.UserTopicViewModel>)
                             {
                                 <!--<li><a href="CaterpillarK.html"><img class "featuredImg img-circle" src="img/topic-photo.JPG" width="20%"> <h4 class="crno1">  @item.Topic.Name </h4></a></li> -->
                                 <li><a href="#"> <h4 class="crno1">  @item.Topic.Name </h4></a></li>
@@ -147,8 +147,8 @@
 
 
         </div>
-
-
+    
+    @*
         @foreach (var item in ViewData["Subjects"] as List<Caterpillar.Models.UserClassCourse>)
     {
         <tr>
@@ -174,6 +174,6 @@
             <td>
             </td>
         </tr>
-    }
+    }*@
     </div>
 

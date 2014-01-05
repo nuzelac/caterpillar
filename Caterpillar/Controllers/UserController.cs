@@ -86,6 +86,7 @@ namespace Caterpillar.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.Password = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password,"SHA1");
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

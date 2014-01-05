@@ -60,6 +60,7 @@ namespace Gusjenica.Controllers
             ViewData["Admin"] = admin;
             if (ModelState.IsValid)
             {
+                user.Password = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password, "SHA1");
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -98,6 +99,7 @@ namespace Gusjenica.Controllers
             ViewData["Admin"] = admin;
             if (ModelState.IsValid)
             {
+                user.Password = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password, "SHA1");
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

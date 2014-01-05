@@ -53,7 +53,8 @@ namespace Caterpillar.Controllers
                 System.Web.Security.FormsAuthentication.SignOut();
                 //var user = await UserManager.FindAsync(model.UserName, model.Password);
                 CaterpillarContext db = new CaterpillarContext();
-                List<User> foundUsers = db.Users.Where(u=>u.UserName == model.UserName && u.Password == model.Password).ToList();
+                string pass = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(model.Password, "SHA1");
+                List<User> foundUsers = db.Users.Where(u=>u.UserName == model.UserName && u.Password == pass).ToList();
                 if (foundUsers.Count > 0)
                 {
                     System.Web.Security.FormsAuthentication.SetAuthCookie(foundUsers[0].UserName, true);

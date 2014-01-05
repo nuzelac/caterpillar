@@ -23,7 +23,7 @@
 <body>
     <div class="navbar navbar-default navbar-static-top">
         <div class="container">
-            <a href="Caterpillar" class="navbar-brand" style="width: 300px;"> <img class="background-image img-circle" src="@Url.Content("~/Content/img/caterpillar-pia-nacrtano-dobrasiva.jpg")" width="100%">  </a>
+            <a href="#" class="navbar-brand" style="width: 300px;"> <img class="background-image img-circle" src="@Url.Content("~/Content/img/caterpillar-pia-nacrtano-dobrasiva.jpg")" width="100%">  </a>
 
 
             <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
@@ -42,7 +42,27 @@
                             <a style="color:#f1700f">Hi @User.Identity.Name.ToString() ! </a>
                         }
                     </li>
-                    <li class="active"><a href="../Home">Home</a></li>
+                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                    @if (User == null)
+                    {    
+                        
+                    }
+                    else if (User.IsInRole("Administrator"))
+                    {
+                         <li><a href="@Url.Action("Index","MainMenuAdmin")">Main Menu</a></li>
+                    }
+                    else if (User.IsInRole("Teacher"))
+                    {
+                         <li><a href="@Url.Action("Index","MainMenuTeacher")">Main Menu</a></li>
+                    }
+                    else if (User.IsInRole("Student"))
+                    {
+                         <li><a href="@Url.Action("Index","MainMenuStudent")">Main Menu</a></li>
+                    }
+                    else 
+                    {    
+                        
+                    }
                     <li>@if (Request.IsAuthenticated)
                         { 
                             @Html.ActionLink("Log Out", "LogOff", "Account")
@@ -52,14 +72,14 @@
                             @Html.ActionLink("Log In", "Login", "Account")
                         }
                     </li>
-                    <li class="dropdown">
+                    <!--<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Twitter</a></li>
                             <li><a href="#">Facebook</a></li>
                             <li><a href="#">Gooogle+</a></li>
                         </ul>
-                    </li>
+                    </li>-->
 
                     <li><a href="#contact" data-toggle="modal">Contact</a></li>
 

@@ -332,11 +332,11 @@ namespace Caterpillar.Controllers
 
 		public ActionResult ViewEntries(int? idClass, int? idCourse, int? idTopic)
 		{
-			var kwlentries = db.KWLentries.Include(k => k.Topic).Include(k => k.User).Where(u => u.TopicId == idTopic);
+			var kwlentries = db.KWLentries.Include(k => k.Topic).Include(k => k.User).Where(u => u.TopicId == idTopic).OrderBy(u => u.Type).ThenBy(u => u.Topic.Name).ThenBy(u => u.User.Name).ToList();
 			ViewData["PrimljeniClassId"] = idClass;
 			ViewData["PrimljeniCourseId"] = idCourse;
 			ViewData["PrimljeniTopicId"] = idTopic;
-			return View(kwlentries.ToList());
+			return View(kwlentries);
 		}
 
 		// GET: /Entry/Create

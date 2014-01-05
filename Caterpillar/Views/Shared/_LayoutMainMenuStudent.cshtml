@@ -28,16 +28,49 @@
             @Html.ActionLink("Hello " + Session["PrimljeniUser-UserName"] + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
             <div class="collapse navbar-collapse navHeaderCollapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="home">Home</a></li>
-                    <li><a href="Account/Login">../Login</a></li>
-                    <li class="dropdown">
+                    <li style="color:#f1700f">@if (Request.IsAuthenticated)
+                        { 
+                            <a style="color:#f1700f">Hi @User.Identity.Name.ToString() ! </a>
+                        }
+                    </li>
+                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                    @if (User == null)
+                    {    
+                        <li><a href="@Url.Action("Index","Home")">Main Menu</a></li>
+                    }
+                    else if (User.IsInRole("Administrator"))
+                    {
+                         <li><a href="@Url.Action("Index","MainMenuAdmin")">Main Menu</a></li>
+                    }
+                    else if (User.IsInRole("Teacher"))
+                    {
+                         <li><a href="@Url.Action("Index","MainMenuTeacher")">Main Menu</a></li>
+                    }
+                    else if (User.IsInRole("Student"))
+                    {
+                         <li><a href="@Url.Action("Index","MainMenuStudent")">Main Menu</a></li>
+                    }
+                    else 
+                    {    
+                        <li><a href="@Url.Action("Index","Home")">Main Menu</a></li>
+                    }
+                    <li>@if (Request.IsAuthenticated)
+                        { 
+                            @Html.ActionLink("Log Out", "LogOff", "Account")
+                        }
+                        else 
+                        {
+                            @Html.ActionLink("Log In", "Login", "Account")
+                        }
+                    </li>
+                    <!--<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Twitter</a></li>
                             <li><a href="#">Facebook</a></li>
                             <li><a href="#">Gooogle+</a></li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li><a href="#contact" data-toggle="modal">Contact</a></li>
                 </ul>
             </div>

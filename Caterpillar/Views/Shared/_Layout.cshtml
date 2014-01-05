@@ -45,7 +45,27 @@
                             <a style="color:#f1700f">Hi @User.Identity.Name.ToString() ! </a>
                         }
                     </li>
-                    <li class="active"><a href="../Home">Home</a></li>
+                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                    @if (User == null)
+                    {    
+                        <li><a href="@Url.Action("Index","Home")">Main Menu</a></li>
+                    }
+                    else if (User.IsInRole("Administrator"))
+                    {
+                         <li><a href="@Url.Action("Index","MainMenuAdmin")">Main Menu</a></li>
+                    }
+                    else if (User.IsInRole("Teacher"))
+                    {
+                         <li><a href="@Url.Action("Index","MainMenuTeacher")">Main Menu</a></li>
+                    }
+                    else if (User.IsInRole("Student"))
+                    {
+                         <li><a href="@Url.Action("Index","MainMenuStudent")">Main Menu</a></li>
+                    }
+                    else 
+                    {    
+                        <li><a href="@Url.Action("Index","Home")">Main Menu</a></li>
+                    }
                     <li>@if (Request.IsAuthenticated)
                         { 
                             @Html.ActionLink("Log Out", "LogOff", "Account")
@@ -55,14 +75,14 @@
                             @Html.ActionLink("Log In", "Login", "Account")
                         }
                     </li>
-                    <li class="dropdown">
+                    <!--<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Twitter</a></li>
                             <li><a href="#">Facebook</a></li>
                             <li><a href="#">Gooogle+</a></li>
                         </ul>
-                    </li>
+                    </li> -->
 
                     <li><a href="#contact" data-toggle="modal">Contact</a></li>
 
@@ -129,7 +149,7 @@
                     //else if (((Role)Session["PrimljeniUser-Role"]).Name == "Administrator")
                     else if (User.IsInRole("Administrator"))
                     {
-                         <a href="../MainMenuAdmin" class="list-group-item" style="background-color: #fdf0e7;">
+                         <a href="@Url.Action("Index","MainMenuAdmin")" class="list-group-item" style="background-color: #fdf0e7;">
                             <center>
                                 <h1 class="list-group-item-heading">Main Menu</h1>
                             </center>
@@ -137,7 +157,7 @@
                     }
                     else if (User.IsInRole("Teacher"))
                     {
-                         <a href="../MainMenuTeacher" class="list-group-item" style="background-color: #fdf0e7;">
+                         <a href="@Url.Action("Index","MainMenuTeacher")" class="list-group-item" style="background-color: #fdf0e7;">
                             <center>
                                 <h1 class="list-group-item-heading">Main Menu</h1>
                             </center>
@@ -145,7 +165,7 @@
                     }
                     else if (User.IsInRole("Student"))
                     {
-                         <a href="../MainMenuStudent" class="list-group-item" style="background-color: #fdf0e7;">
+                         <a href="@Url.Action("Index","MainMenuStudent")" class="list-group-item" style="background-color: #fdf0e7;">
                             <center>
                                 <h1 class="list-group-item-heading">Main Menu</h1>
                             </center>

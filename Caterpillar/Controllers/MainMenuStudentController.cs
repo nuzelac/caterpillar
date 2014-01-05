@@ -64,10 +64,13 @@ namespace Caterpillar.Controllers
 			var studentClass = studentClassCourses[0].Class;
 			Session["Class"] = studentClass;
 			List<Course> studentCourses = new List<Course>();
+            List<int> studentCourseId=new List<int>();
 			foreach (var elem in studentClassCourses)
 			{
 				studentCourses.Add(elem.Course);
+                studentCourseId.Add(elem.Course.Id);
 			}
+            
 
 
 			//var kwlentries = student.KWLentries;
@@ -75,19 +78,28 @@ namespace Caterpillar.Controllers
 
 			var subjects = student.UserClassCourses;
 			ViewData["Subjects"] = subjects.ToList();
-			
+			/*
 			var topics = from a in subjects.ToList()
 						 join b in db.CourseTopics
 						 on a.CourseId equals b.CourseId
 						 select new UserTopicViewModel
 						 {
 							 Topic = b.Topic
-						 };
+						 };*/
+            var foundtopics = from a in db.ClassTopics
+                         join b in db.CourseTopics
+                         on a.TopicId equals b.TopicId
+                         where a.ClassId == studentClass.Id && studentCourseId.Contains(b.CourseId)
+                         select new UserTopicViewModel
+                         {
+                            Topic = b.Topic
+                         };
+            var topics = foundtopics.Distinct().ToList();
 			
 			var studentTopics = db.ClassTopics.Where(u => u.ClassId == studentClass.Id).ToList();
 
 
-			ViewData["Topics"] = topics.ToList();
+			ViewData["Topics"] = topics;
 			ViewData["StudentTopics"] = studentTopics;
 
 			return View();
