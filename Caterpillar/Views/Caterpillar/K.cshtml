@@ -17,8 +17,6 @@
     jQuery(function () {
         caterpillar('#caterpillar', {
             tailOnClick: function (d) {
-                console.log(this);
-                
                 $('#new-entry-submit').off('click');
                 $('#new-entry-submit').click(function (e) {
                     e.preventDefault();
@@ -47,7 +45,30 @@
                 $('#kwl-new #Entry').val('');
                 $('#kwl-new').modal('show');
             }, // or function()
-            nodeOnClick: false
+            nodeOnClick: function (d) {
+                $('#kwl-show-kentry #tekst-cinjenice').html(d.text);
+                $('#kwl-show-kentry #kentry-id').val(d.id);
+
+                $('#kentry-delete').off('click');
+                $('#kentry-delete').click(function (e) {
+                    e.preventDefault();
+
+                    $.post($('#delete-kentry-form').attr('action'),
+                       $('#delete-kentry-form').serialize(),
+                       function (data, status, xhr) {
+                           if (data.success === true) {
+                               $('#kwl-show-kentry').modal('hide');
+                               window.remove(data.id);
+                               window.update();
+                           }
+                           // do something here with response;
+                       });
+
+                    return false;
+                });
+
+                $('#kwl-show-kentry').modal('show');
+            }
         });
     });
 </script>
@@ -56,3 +77,5 @@
 </div>
 
 @Html.Partial("_NewKEntryModal")
+
+@Html.Partial("_ShowKEntryModal")

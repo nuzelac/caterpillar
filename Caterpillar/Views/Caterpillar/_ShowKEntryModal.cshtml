@@ -1,0 +1,22 @@
+﻿<div class="modal fade" id="kwl-show-kentry" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" id="delete-kentry-form" action="@Url.Action("DeleteKEntry")">
+                <div class="modal-header">
+                    <h4>Show Entry</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-lg-12">
+                        <label class="control-label">Entry:</label>
+                        <p><div id="tekst-cinjenice"></div></p>
+                        <input type="hidden" id="kentry-id" name="KEntryId" value="" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger" id="kentry-delete">Delete</a>
+                    <a class="btn btn-primary btn-default" data-dismiss="modal">Close</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

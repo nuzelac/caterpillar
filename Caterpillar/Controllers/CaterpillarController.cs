@@ -172,6 +172,26 @@ namespace Caterpillar.Controllers
             return PartialView("_NewKEntryModal", Entry);
         }
 
+        // POST: /Caterpillar/Delete/5
+        [HttpPost]
+        public ActionResult DeleteKEntry(int KEntryId)
+        {
+            var trenutniUserName = User.Identity.Name.ToString();
+            var student = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
+
+            KWLentry kwlentry = db.KWLentries.Find(KEntryId);
+            if (kwlentry != null && kwlentry.User == student)
+            {
+                db.KWLentries.Remove(kwlentry);
+                db.SaveChanges();
+                return Json(new { success = true, id = kwlentry.Id });
+            }
+            else
+            {
+                return Json(new { success = false });
+            }
+        }
+
 
         // GET: /Caterpillar/Edit/5
         public ActionResult Edit(int? id)

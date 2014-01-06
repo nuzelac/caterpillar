@@ -41,6 +41,18 @@
         update();
     }
 
+    window.remove = function (id) {
+        for (i in nodes) {
+            if (nodes[i].id == id) {
+                links.splice(nodes.length - i - 2, 1);
+                nodes.splice(i, 1);
+                links[nodes.length - i - 1].target = nodes[i];
+            }
+        }
+        update();
+        update();
+    }
+
     window.width = $(selector).width(),
       height = 800;
 
