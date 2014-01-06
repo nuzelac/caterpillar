@@ -171,8 +171,18 @@
               "font-size": "17px"
           })
             .html(function (d) {
-                if (d.nodeType !== nodeType.HEAD)
-                    return d.text;
+                if (d.nodeType !== nodeType.HEAD) {
+                    if (d.hasOwnProperty('question')) {
+                        var q = d.question;
+                        var ans = d.text;
+                        var allowed_len = 20;
+                        if (q.length > allowed_len) q = q.substring(0, allowed_len) + "...";
+                        if (ans.length > allowed_len) ans = ans.substring(0, allowed_len) + "...";
+                        return q + " " + d.text;
+                    } else {
+                        return d.text;
+                    }
+                }
             });
 
         node.exit().remove();
