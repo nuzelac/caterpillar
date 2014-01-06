@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutMainMenuAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Entries</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.Topic.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Name)
+            @Html.DisplayNameFor(model => model.User.Surname)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Type)
@@ -33,10 +33,15 @@
             @Html.DisplayFor(modelItem => item.Topic.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.User.Name)
+            @Html.DisplayFor(modelItem => item.User.Surname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
+            @if (item.Type == 0) { 
+                <p>Question</p>
+            }
+            else if (item.Type == 1) { 
+                <p>Fact</p>
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Entry)

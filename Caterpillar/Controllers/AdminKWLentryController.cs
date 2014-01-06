@@ -19,7 +19,7 @@ namespace Gusjenica.Controllers
         {
             var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             ViewData["Admin"] = admin;
-            var kwlentry = db.KWLentries.Include(k => k.User);
+            var kwlentry = db.KWLentries.Include(k => k.User).OrderByDescending(u => u.Type).ThenBy(u => u.Topic.Name).ThenBy(u => u.User.Surname);
             return View(kwlentry.ToList());
         }
 

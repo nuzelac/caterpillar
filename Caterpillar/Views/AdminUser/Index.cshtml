@@ -45,7 +45,7 @@
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Password)
+            @item.Password.Substring(0,8)...
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

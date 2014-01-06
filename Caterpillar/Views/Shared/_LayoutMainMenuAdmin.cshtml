@@ -96,63 +96,63 @@
 
                         </center>
                     </a>
-                    <a href="../AdminUser" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminUser")
+                    <a href="@Url.Action("Index", "AdminUser")" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminUser")
                                            {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
                         <center>
                             Users
                         </center>
                     </a>
-                    <a href="../AdminRole" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminRole")
+                    <a href="@Url.Action("Index", "AdminRole")" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminRole")
                                            {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
                         <center>
                             Roles
                         </center>
                     </a>
-                    <a href="../AdminClass" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminClass")
+                    <a href="@Url.Action("Index", "AdminClass")" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminClass")
                                            {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
                         <center>
                             Classes
                         </center>
                     </a>
-                    <a href="../AdminCourse" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminCourse")
+                    <a href="@Url.Action("Index", "AdminCourse")" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminCourse")
                                            {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
                         <center>
                             Courses
 
                         </center>
                     </a>
-                    <a href="../AdminTopic" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminTopic")
+                    <a href="@Url.Action("Index", "AdminTopic")" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminTopic")
                                            {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
                         <center>
                             Topics
                         </center>
                     </a>
-                    <a href="../AdminCourseTopic" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminCourseTopic")
+                    <a href="@Url.Action("Index", "AdminCourseTopic")" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminCourseTopic")
                                            {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
                         <center>
                             Courses and topics
                         </center>
                     </a>
-                    <a href="../AdminClassTopic" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminClassTopic")
+                    <a href="@Url.Action("Index", "AdminClassTopic")" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminClassTopic")
                                            {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
                         <center>
                             Classes and topics
                         </center>
                     </a>
-                    <a href="../AdminUserClassCourse" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminUserClassCourse")
+                    <a href="@Url.Action("Index", "AdminUserClassCourse")" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminUserClassCourse")
                                            {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
                         <center>
                             Users, classes and coures
                         </center>
                     </a>
-                    <a href="../AdminKWLentry" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminKWLentry")
+                    <a href="@Url.Action("Index", "AdminKWLentry")" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminKWLentry")
                                            {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
                         <center>
                             KWL entries
                         </center>
                     </a>
 
-                    <a href="../AdminResponse" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminResponse")
+                    <a href="@Url.Action("Index", "AdminResponse")" @if (ViewContext.RouteData.Values["controller"].ToString() == "AdminResponse")
                                            {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
                         <center>
                             KWL Responses
