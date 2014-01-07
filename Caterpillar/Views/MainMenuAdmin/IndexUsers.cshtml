@@ -1,28 +1,12 @@
 ﻿@model IEnumerable<Caterpillar.Models.User>
 
 
-@using Microsoft.AspNet.Identity
-
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "IndexUsers";
     Layout = "~/Views/Shared/_LayoutMainMenuAdmin.cshtml";
 }
 
-<h2>Index</h2>
-
-
-@{
-    var AdminName = (ViewData["Admin"] as Caterpillar.Models.User).Name;
-    var AdminSurname = (ViewData["Admin"] as Caterpillar.Models.User).Surname;
-    <div>
-
-
-        @AdminName
-        @AdminSurname
-    </div>
-    
-}
+<h2>Users</h2>
 
 <p>
     @Html.Action("Create New", "CreateUsers")
@@ -31,25 +15,25 @@
 <table class="table">
     <tr>
         <th>
-            RoleName
+            @Html.DisplayNameFor(model => model.Role.Name)
         </th>
         <th>
-           Name
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-           Surname
+            @Html.DisplayNameFor(model => model.Surname)
         </th>
         <th>
-            UserName
+            @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            Password
+            @Html.DisplayNameFor(model => model.Password)
         </th>
         <th></th>
     </tr>
 
 
-    @foreach (var item in ViewData["Users"] as List<Caterpillar.Models.User>)
+    @foreach (var item in  ViewData["Users"])
     {
         <tr>
             <td>

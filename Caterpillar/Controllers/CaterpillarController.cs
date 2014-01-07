@@ -17,7 +17,7 @@ namespace Caterpillar.Controllers
         // GET: /Caterpillar/
         public ActionResult Index()
         {
-            var kwlentries = db.KWLentries.Include(k => k.User);
+            var kwlentries = db.KWLentries.Include(k => k.User== Session["PrimljeniUser"]);
             return View(kwlentries.ToList());
         }
 

@@ -342,6 +342,8 @@
     <Content Include="Views\MainMenuTeacher\Edit.cshtml" />
     <Content Include="Views\MainMenuTeacher\Delete.cshtml" />
     <Content Include="Views\MainMenuAdmin\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutMainMenuAdmin.cshtml" />
+    <Content Include="Views\MainMenuAdmin\IndexUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
