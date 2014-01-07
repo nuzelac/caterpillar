@@ -94,6 +94,8 @@ namespace Caterpillar.Controllers
 
 		public ActionResult ViewStudents(int? idClass, int? idCourse)
 		{
+            ViewBag.ClassName = db.Classes.Find(idClass).Name;
+            ViewBag.CourseName = db.Courses.Find(idCourse).Name;
 			var trenutniUserName = User.Identity.Name;
 			var teacher = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
 			Session["Teacher"] = teacher;
@@ -122,6 +124,8 @@ namespace Caterpillar.Controllers
 		{
 			var trenutniUserName = User.Identity.Name;
 			var teacher = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
+            ViewBag.ClassName = db.Classes.Find(idClass).Name;
+            ViewBag.CourseName = db.Courses.Find(idCourse).Name;
 			Session["Teacher"] = teacher;
 			ViewData["Class"] = idClass;
 			ViewData["Course"] = idCourse;
@@ -140,7 +144,7 @@ namespace Caterpillar.Controllers
 									  };
 
 			//     var usersOfClassCourse = db.UserClassCourse.Select( s => s.ClassId== idClass);
-			ViewData["Topics"] = topicsOfClassCourse.Distinct().ToList();
+			ViewData["Topics"] = topicsOfClassCourse.Distinct().OrderBy(u => u.Topic.Name).ToList();
 			if (topicsOfClassCourse == null)
 			{
 				return HttpNotFound();
@@ -330,13 +334,46 @@ namespace Caterpillar.Controllers
 			return View(topic);
 		}
 
-		public ActionResult ViewEntries(int? idClass, int? idCourse, int? idTopic)
+		public ActionResult ViewEntries(string sortOrder, string searchString, int? idClass, int? idCourse, int? idTopic)
 		{
-			var kwlentries = db.KWLentries.Include(k => k.Topic).Include(k => k.User).Where(u => u.TopicId == idTopic).OrderBy(u => u.Type).ThenBy(u => u.Topic.Name).ThenBy(u => u.User.Name).ToList();
+            ViewBag.TopicName = db.Topics.Find(idTopic).Name;
+            ViewBag.NameSortParm = sortOrder == "Name" ? "Name_desc" : "Name";
+            ViewBag.TypeSortParm = sortOrder == "Type" ? "Type_desc" : "Type";
+            ViewBag.SurnameSortParm = sortOrder == "Surname" ? "Surname_desc" : "Surname";
+			var kwlentries = db.KWLentries.Include(k => k.Topic).Include(k => k.User).Where(u => u.TopicId == idTopic);
 			ViewData["PrimljeniClassId"] = idClass;
 			ViewData["PrimljeniCourseId"] = idCourse;
 			ViewData["PrimljeniTopicId"] = idTopic;
-			return View(kwlentries);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                kwlentries = kwlentries.Where(s => s.User.Name.ToUpper().Contains(searchString.ToUpper()) ||
+                                                   s.User.Surname.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "Name":
+                    kwlentries = kwlentries.OrderBy(u => u.User.Name);
+                    break;
+                case "Name_desc":
+                    kwlentries = kwlentries.OrderByDescending(u => u.User.Name);
+                    break;
+                case "Surname":
+                    kwlentries = kwlentries.OrderBy(u => u.User.Surname);
+                    break;
+                case "Surname_desc":
+                    kwlentries = kwlentries.OrderByDescending(u => u.User.Surname);
+                    break;
+                case "Type":
+                    kwlentries = kwlentries.OrderBy(u => u.Type).ThenBy(u => u.User.Name);
+                    break;
+                case "Type_desc":
+                    kwlentries = kwlentries.OrderByDescending(u => u.Type).ThenBy(u => u.User.Name);
+                    break;
+                default:
+                    kwlentries = kwlentries.OrderByDescending(u => u.Type).ThenBy(u => u.User.Name);
+                    break;
+            }
+			return View(kwlentries.ToList());
 		}
 
 		// GET: /Entry/Create
@@ -438,12 +475,38 @@ namespace Caterpillar.Controllers
 			return RedirectToAction("ViewEntries", new { idClass = (int)idClass, idCourse = (int)idCourse, idTopic = (int)idTopic });
 		}
 
-		public ActionResult ViewResponses(int? idClass, int? idCourse, int? idTopic)
+		public ActionResult ViewResponses(string sortOrder, string searchString, int? idClass, int? idCourse, int? idTopic)
 		{
+            ViewBag.TopicName = db.Topics.Find(idTopic).Name;
+            ViewBag.NameSortParm = sortOrder == "Name" ? "Name_desc" : "Name";
+            ViewBag.SurnameSortParm = sortOrder == "Surname" ? "Surname_desc" : "Surname";
 			var responses = db.Responses.Include(r => r.KWLentry).Include(r => r.User).Where(u => u.KWLentry.TopicId == idTopic);
 			ViewData["PrimljeniClassId"] = idClass;
 			ViewData["PrimljeniCourseId"] = idCourse;
 			ViewData["PrimljeniTopicId"] = idTopic;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                responses = responses.Where(s => s.User.Name.ToUpper().Contains(searchString.ToUpper()) ||
+                                                   s.User.Surname.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "Name":
+                    responses = responses.OrderBy(u => u.User.Name).ThenBy(u => u.KWLentry.Entry).ThenBy(u => u.Response1);
+                    break;
+                case "Name_desc":
+                    responses = responses.OrderByDescending(u => u.User.Name).ThenBy(u => u.KWLentry.Entry).ThenBy(u => u.Response1);
+                    break;
+                case "Surname":
+                    responses = responses.OrderBy(u => u.User.Surname).ThenBy(u => u.KWLentry.Entry).ThenBy(u => u.Response1);
+                    break;
+                case "Surname_desc":
+                    responses = responses.OrderByDescending(u => u.User.Surname).ThenBy(u => u.KWLentry.Entry).ThenBy(u => u.Response1);
+                    break;
+                default:
+                    responses = responses.OrderBy(u => u.KWLentry.Entry).ThenBy(u => u.Response1);
+                    break;
+            }
 			return View(responses.ToList());
 		}
 

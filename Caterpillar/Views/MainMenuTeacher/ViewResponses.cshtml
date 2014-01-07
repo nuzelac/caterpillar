@@ -8,7 +8,19 @@
     int idTopic = (int)ViewData["PrimljeniTopicId"];
 }
 
-<h2>Responses</h2>
+<h2>Responses for topic: @ViewBag.TopicName</h2>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")  
+        <input type="submit" value="Search" /></p>
+}
+
+<br />
+
 
 <table class="table">
     <tr>
@@ -16,10 +28,13 @@
             @Html.DisplayNameFor(model => model.KWLentry.Entry)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.Name)
+            Response
         </th>
         <th>
-            Response
+            @Html.ActionLink("Name", "ViewResponses", new { sortOrder = ViewBag.NameSortParm, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] })
+        </th>
+        <th>
+            @Html.ActionLink("Surname", "ViewResponses", new { sortOrder = ViewBag.SurnameSortParm, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] })
         </th>
         <th>
             Corrected
@@ -36,10 +51,13 @@
             @Html.DisplayFor(modelItem => item.KWLentry.Entry)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Response1)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.User.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Response1)
+            @Html.DisplayFor(modelItem => item.User.Surname)
         </td>
         <td>
             @if (item.Correction == 0) 
@@ -71,3 +89,6 @@
 
 </table>
 
+<p>
+        @Html.ActionLink("Back to List", "ViewTopics", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"] } )
+</p>

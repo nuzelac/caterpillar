@@ -1,25 +1,37 @@
 ﻿@model IEnumerable<Caterpillar.Models.KWLentry>
+@using Caterpillar.Models
 
 @{
     ViewBag.Title = "ViewEntries";
     Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
 }
 
-<h2>Entries</h2>
+<h2>Entries for topic: @ViewBag.TopicName</h2>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")  
+        <input type="submit" value="Search" /></p>
+}
+
+<br />
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Topic.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
+            @Html.ActionLink("Type", "ViewEntries", new { sortOrder = ViewBag.TypeSortParm, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Entry)
+        </th>
+        <th>
+            @Html.ActionLink("Name", "ViewEntries", new { sortOrder = ViewBag.NameSortParm, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] })
+        </th>
+        <th>
+            @Html.ActionLink("Surname", "ViewEntries", new { sortOrder = ViewBag.SurnameSortParm, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] })
         </th>
         <th></th>
     </tr>
@@ -27,16 +39,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Topic.Name)
+            @if (item.Type == 0)
+            { 
+                <p>Question</p>
+            }
+            else { 
+                <p>Fact</p>
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Entry)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.User.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Entry)
+            @Html.DisplayFor(modelItem => item.User.Surname)
         </td>
         <td>
             @Html.ActionLink("Edit", "EditEntry", new { id = item.Id, idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = ViewData["PrimljeniTopicId"] }) |
