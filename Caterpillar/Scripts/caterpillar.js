@@ -209,7 +209,7 @@
                         .attr('width', headRadius * 2)
                         .attr('height', headRadius * 2)
                         .attr("xlink:href", function (d) {
-                            return "/Content/img/wurm3.svg";
+                            return "../Content/img/wurm3.svg";
                         })
 
         headBackgroundImage.exit().remove();
@@ -223,7 +223,7 @@
                         .attr('width', headRadius * 2)
                         .attr('height', headRadius * 2)
                         .attr("xlink:href", function (d) {
-                            return "/Content/img/wurm32.svg";
+                            return "../Content/img/wurm32.svg";
                         })
 
         headTicalaImage.exit().remove();
