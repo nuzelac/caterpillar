@@ -1,8 +1,9 @@
 ﻿<div class="modal fade" id="kwl" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
+            <form class="form-horizontal" id="delete-answer-form" action="@Url.Action("DeleteResponse")">
                 <div class="modal-header">
-                    <h4>Answer</h4>
+                    <h4>Response</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group col-lg-12">
@@ -11,8 +12,9 @@
                         <input type="hidden" id="question-id" name="EntryId" value="" />
                     </div>
                     <div class="form-group col-lg-12">
-                        <label class="control-label">Answer:</label>
+                        <label class="control-label">Response:</label>
                         <p><div id="tekst-odgovora"></div></p>
+                        <input type="hidden" id="response-id" name="ResponseId" value="" />
                     </div>
                     <div class="form-group col-lg-12">
                         <label class="control-label">Corrected:</label>
@@ -24,8 +26,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <a class="btn btn-danger" id="answer-delete">Delete</a>
                     <a class="btn btn-primary btn-default" data-dismiss="modal">Close</a>
                 </div>
+            </form>
         </div>
     </div>
 </div>

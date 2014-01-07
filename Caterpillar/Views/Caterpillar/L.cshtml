@@ -21,15 +21,37 @@
         caterpillar('#caterpillar', {
             tailOnClick: false, // or function()
             nodeOnClick: function (d) {
+                $('#answer-delete').off('click');
                 $('#kwl #tekst-pitanja').html(d.question);
                 $('#kwl #question-id').val(d.id);
                 $('#kwl #tekst-odgovora').html(d.text);
+                $('#kwl #response-id').val(d.id);
+
                 if (d.correction == 1) {
-                    $('#kwl #tekst-ocijenjeno').html("da");
+                    $('#kwl #tekst-ocijenjeno').html("yes");
                     $('#kwl #tekst-bodovi').html(d.points);
+                    $('#kwl #answer-delete').attr("disabled", true);
                 } else {
-                    $('#kwl #tekst-ocijenjeno').html("ne");
+                    $('#kwl #tekst-ocijenjeno').html("no");
                     $('#kwl #tekst-bodovi').html("-");
+                    $('#kwl #answer-delete').attr("disabled", false);
+
+                    $('#answer-delete').click(function (e) {
+                        e.preventDefault();
+
+                        $.post($('#delete-answer-form').attr('action'),
+                           $('#delete-answer-form').serialize(),
+                           function (data, status, xhr) {
+                               if (data.success === true) {
+                                   $('#kwl').modal('hide');
+                                   window.remove(data.id);
+                                   window.update();
+                               }
+                               // do something here with response;
+                           });
+
+                        return false;
+                    });
                 }
                 $('#kwl').modal('show');
             }

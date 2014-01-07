@@ -192,6 +192,25 @@ namespace Caterpillar.Controllers
             }
         }
 
+        // POST: /Caterpillar/Delete/5
+        [HttpPost]
+        public ActionResult DeleteResponse(int ResponseId)
+        {
+            var trenutniUserName = User.Identity.Name.ToString();
+            var student = db.Users.Where(u => u.UserName == trenutniUserName).FirstOrDefault();
+
+            Response response = db.Responses.Find(ResponseId);
+            if (response != null && response.User == student && response.Correction != 1)
+            {
+                db.Responses.Remove(response);
+                db.SaveChanges();
+                return Json(new { success = true, id = response.Id });
+            }
+            else
+            {
+                return Json(new { success = false });
+            }
+        }
 
         // GET: /Caterpillar/Edit/5
         public ActionResult Edit(int? id)
