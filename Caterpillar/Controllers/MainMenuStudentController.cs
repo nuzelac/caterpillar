@@ -40,6 +40,7 @@ namespace Caterpillar.Controllers
 		public class UserTopicViewModel
 		{
 			public Topic Topic { get; set; }
+            public Course Course { get; set; }
 		}
 
         public class TOPICSClassCourseViewModel
@@ -92,7 +93,8 @@ namespace Caterpillar.Controllers
                          where a.ClassId == studentClass.Id && studentCourseId.Contains(b.CourseId)
                          select new UserTopicViewModel
                          {
-                            Topic = b.Topic
+                            Topic = b.Topic,
+                            Course = b.Course
                          };
             var topics = foundtopics.Distinct().ToList();
 			
