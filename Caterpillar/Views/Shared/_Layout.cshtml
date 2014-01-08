@@ -1,5 +1,7 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using System.Linq;
+@using Microsoft.AspNet.Identity
 @using Caterpillar.Models;
+@using System.Data.Entity;
 <!DOCTYPE html>
 <html>
 <head>
@@ -185,28 +187,57 @@
                         <center>
                             <h1 class="bijelo1bold" style="background-color: #f1700f; border-bottom-left-radius: 50px; /* border-bottom-right-radius: 50px; */border-width: 50px;padding: 20px;">Users</h1>
                         </center>
-                        <a href="#"><p class="list-group-item-body">Me</p></a>
-                        <a href="#"><p class="list-group-item-body">Teacher</p></a>
-                        <ol>
-                            <li>Student 1</li>
-                            <li>Student 2</li>
-                            <li>Student 3</li>
-                            <li>Student 4</li>
-                            <li>Student 5</li>
-                        </ol>
+                        <!--<a href="#"><p class="list-group-item-body">Me</p></a>
+                        <a href="#"><p class="list-group-item-body">Teacher</p></a>-->
+                        @if (Session["OdabraniTopicId"] != null)
+                        {
+
+                            CaterpillarContext db = new CaterpillarContext();
+                            var topic = db.Topics.Find((int)Session["OdabraniTopicId"]);
+                            var studentClass = (Caterpillar.Models.Class)Session["Class"];
+                            var usersOfClassCourse = (from a in db.UserClassCourses
+                                                     where a.ClassId == studentClass.Id && a.User.Role.Name == "Student"
+                                                     select new
+                                                     {
+                                                         User = a.User
+                                                     }).Distinct();
+                            <ol>
+                                @foreach (var item in usersOfClassCourse)
+                                {
+                                    <li>
+                                        @item.User.Name @item.User.Surname
+                                    </li>
+                                }
+                            </ol>
+                        }
                     
                     
                         <center>
                            <h1 class="bijelo1bold" style="background-color: #f1700f; border-bottom-left-radius: 50px; padding: 20px;">Scores</h1>
                         </center>
-                        <ol>
-                            <li>Student 1</li>
-                            <li>Student 2</li>
-                            <li>Student 3</li>
-                            <li>Student 4</li>
-                            <li>Student 5</li>
+                        @if (Session["OdabraniTopicId"] != null)
+                        {
+                            
+                            CaterpillarContext db = new CaterpillarContext();
+                            var studentClass = (Caterpillar.Models.Class)Session["Class"];                            
+                            var usersOfClassCourse = (from a in db.UserClassCourses
+                                                      where a.ClassId == studentClass.Id && a.User.Role.Name == "Student"
+                                                      select a.User).Distinct();                            
+                            var topic = db.Topics.Find((int)Session["OdabraniTopicId"]);
+                            var scores = db.Responses.Include(a => a.User).Include(a => a.KWLentry.Topic).Where(a => a.KWLentry.TopicId == topic.Id).Where(a => usersOfClassCourse.Contains(a.User)).GroupBy(o => o.UserId)
+                                .Select(g => new { student = g.Key, score = g.Sum(i => i.Points) }).Where(g => g.score > 0).OrderByDescending(g => g.score).Take(5);
+                            
+                            <ol>
+                            @foreach (var item in scores)
+                            {
+                                var student = db.Users.Find(item.student);
+                                <li>
+                                    @student.Name @student.Surname
+                                    @item.score
+                                </li>
+                            }
                         </ol>
-                   
+                        }
                 </div>
             </div>
         </div>
