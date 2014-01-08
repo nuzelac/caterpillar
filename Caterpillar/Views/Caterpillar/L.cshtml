@@ -9,8 +9,8 @@
 
     @foreach (var item in Model) {
         @Html.Raw("questions.push({" +
-            "entry: '" + Html.DisplayFor((modelItem => item.Response1)) + "'," +
-            "question: '" + Html.DisplayFor((modelItem => item.KWLentry.Entry)) + "'," +
+                 "entry: " + Html.Raw(Json.Encode((item.Response1))) + "," +
+                 "question: " + Html.Raw(Json.Encode((item.KWLentry.Entry))) + "," +
             "correction: '" + Html.DisplayFor((modelItem => item.Correction)) + "'," +
             "points: '" + Html.DisplayFor((modelItem => item.Points)) + "'," +                             
             "id: '" + Html.DisplayFor((modelItem => item.Id)) + "'" +
