@@ -18,7 +18,7 @@ using Microsoft.Owin.Security;
 
 namespace Caterpillar.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+	[Authorize(Roles = "Administrator")]
 	public class MainMenuAdminController : Controller
 	{
 		public MainMenuAdminController()
@@ -43,14 +43,10 @@ namespace Caterpillar.Controllers
 			var currentAdmin = UserManager.FindByIdAsync(User.Identity.GetUserId());
 			var admin = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
 			ViewData["Admin"] = admin;
-            if (Session["Admin"] == null)
-            {
-                Session["Admin"] = admin;
-            }
-                
-
-
-
+			if (Session["Admin"] == null)
+			{
+				Session["Admin"] = admin;
+			}
 			return View();
 		}
 	}

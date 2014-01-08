@@ -9,7 +9,7 @@
     Layout = "~/Views/Shared/_LayoutMainMenuAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h2 style="text-align:center">Choose an action</h2>
 
 
 @{
@@ -17,10 +17,4 @@
     // var AdminSurname = (ViewData["Admin"] as Gusjenica.Models.User).Surname;
     var AdminName = Session["PrimljeniUser-Name"];
     var AdminSurname = Session["PrimljeniUser-Surname"];
-    <div>
-
-
-        @AdminName
-        @AdminSurname
-    </div>
 }

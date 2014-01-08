@@ -9,9 +9,11 @@
     Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Your Classes and Courses</h2>
 
+<br />
 
+@*
 @{
     
     var TeacherName = (Session["Teacher"] as Caterpillar.Models.User).Name;
@@ -38,7 +40,7 @@
                         as List<Caterpillar.Controllers.MainMenuTeacherController.UserTopicViewModel>)
 {
     @item.Topic.Name <text> </text>
-}
+}*@
 
 
 <table class="table">
