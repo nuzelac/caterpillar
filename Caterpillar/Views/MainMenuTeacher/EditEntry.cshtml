@@ -8,14 +8,13 @@
     int idTopic = (int)ViewData["PrimljeniTopicId"];
 }
 
-<h2>EditEntry</h2>
+<h2>Edit entry</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>KWLentry</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
@@ -40,5 +39,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "ViewEntries", new { idClass = (int)idClass, idCourse = (int)idCourse, idTopic = (int)idTopic })
 </div>

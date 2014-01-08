@@ -10,14 +10,13 @@
     
 }
 
-<h2>Create New Entry</h2>
+<h2>Create new entry</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>KWLentry</h4>
         <hr />
         @Html.ValidationSummary(true)
 

@@ -621,6 +621,7 @@ namespace Caterpillar.Controllers
 		{
 			var response = new Response();
 			response.EntryId = (int)id;
+            ViewBag.Entry = db.KWLentries.Find((int)id).Entry.ToString();
 			response.UserId = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault().Id;
 			ViewData["PrimljeniClassId"] = idClass;
 			ViewData["PrimljeniCourseId"] = idCourse;

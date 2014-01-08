@@ -7,14 +7,13 @@
     Layout = "~/Views/Shared/_LayoutMainMenuTeacher.cshtml";
 }
 
-<h2>CreateNewTopic</h2>
+<h2>Create new topic</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Topic</h4>
         <hr />
         @Html.ValidationSummary(true)
 

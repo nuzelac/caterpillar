@@ -78,6 +78,11 @@
     </div>
     <div class="container">
         <div class="row">
+            <ol class="breadcrumb">
+		        <li><a href="@Url.Action("Index","Home")">Home</a></li>
+		        <li><a href="@Url.Action("Index", @ViewContext.RouteData.Values["controller"].ToString())">@ViewContext.RouteData.Values["controller"].ToString()</a></li>
+		        <li class="active">@ViewContext.RouteData.Values["action"].ToString()</li>
+	        </ol>
             <div class="lijeviTab col-sm-3">
                 <div class="list-group">
                     <a href="#" class="list-group-item" style="background-color: #f8b787;">

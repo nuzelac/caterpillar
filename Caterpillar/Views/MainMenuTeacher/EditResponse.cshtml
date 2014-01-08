@@ -8,14 +8,13 @@
     int idTopic = (int)ViewData["PrimljeniTopicId"];
 }
 
-<h2>EditResponse</h2>
+<h2>Edit response</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Response</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)

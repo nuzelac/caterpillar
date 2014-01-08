@@ -7,7 +7,7 @@
     int idCourse = (int)ViewData["PrimljeniCourseId"];
 }
 
-<h2>Edit</h2>
+<h2>Edit topic name</h2>
 
 
 @using (Html.BeginForm())
@@ -15,7 +15,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Topic</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)

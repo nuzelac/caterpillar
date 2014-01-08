@@ -8,11 +8,10 @@
     int idTopic = (int)ViewData["PrimljeniTopicId"];
 }
 
-<h2>DeleteEntry</h2>
+<h2>Delete entry</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete this entry?</h3>
 <div>
-    <h4>KWLentry</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -54,7 +53,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "ViewEntries", new { idClass = (int)idClass, idCourse = (int)idCourse, idTopic = (int)idTopic })
         </div>
     }
 </div>

@@ -78,7 +78,7 @@ namespace Caterpillar.Controllers
 			//ViewData["KWLentries"] = kwlentries.ToList();
 
 			var subjects = student.UserClassCourses;
-			ViewData["Subjects"] = subjects.ToList();
+			ViewData["Subjects"] = subjects.ToList().OrderBy(u => u.Course.Name);
 			/*
 			var topics = from a in subjects.ToList()
 						 join b in db.CourseTopics
@@ -96,12 +96,24 @@ namespace Caterpillar.Controllers
                             Topic = b.Topic,
                             Course = b.Course
                          };
-            var topics = foundtopics.Distinct().ToList();
+
+            var foundtopics2 = from a in db.ClassTopics
+                              join b in db.CourseTopics
+                              on a.TopicId equals b.TopicId
+                              where a.ClassId == studentClass.Id && studentCourseId.Contains(b.CourseId)
+                              select new TOPICSClassCourseViewModel
+                              {
+                                  Topic = b.Topic
+                              };
+
+            var topics = foundtopics.Distinct().ToList().OrderBy(u => u.Topic.Name);
+            var topics2 = foundtopics2.Distinct().ToList().OrderBy(u => u.Topic.Name);
 			
 			var studentTopics = db.ClassTopics.Where(u => u.ClassId == studentClass.Id).ToList();
 
 
 			ViewData["Topics"] = topics;
+            ViewData["Topics2"] = topics2;
 			ViewData["StudentTopics"] = studentTopics;
 
 			return View();

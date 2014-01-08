@@ -12,6 +12,11 @@
 
 <div class="container">
     <div class="row">
+        <ol class="breadcrumb">
+		    <li><a href="@Url.Action("Index","Home")">Home</a></li>
+		    <li><a href="@Url.Action("Index", @ViewContext.RouteData.Values["controller"].ToString())">@ViewContext.RouteData.Values["controller"].ToString()</a></li>
+		    <li class="active">@ViewContext.RouteData.Values["action"].ToString()</li>
+	    </ol>
         <div class=" col-sm-4">
             <div class="list-group">
 
@@ -57,8 +62,8 @@
                 <div class=" col-sm-11">
                     <br />
                     <ul class="list-unstyled">
-                        @foreach (var item in ViewData["Topics"]
-                                as List<Caterpillar.Controllers.MainMenuStudentController.UserTopicViewModel>)
+                        @foreach (var item in ViewData["Topics2"]
+                                as IOrderedEnumerable<Caterpillar.Controllers.MainMenuStudentController.TOPICSClassCourseViewModel>)
                         {
                             <li>
                                 <a href=" @Url.Action("SelectTopic", new { idClass = ViewData["PrimljeniClassId"], idCourse = ViewData["PrimljeniCourseId"], idTopic = @item.Topic.Id }) ">
@@ -88,9 +93,9 @@
                         <br />
                         <ul class="list-unstyled">
                             @foreach (var item in ViewData["Subjects"]
-                             as List<Caterpillar.Models.UserClassCourse>)
+                             as IOrderedEnumerable<Caterpillar.Models.UserClassCourse>)
                             {
-                                var vjudata = ViewData["Topics"] as List<Caterpillar.Controllers.MainMenuStudentController.UserTopicViewModel>;
+                                var vjudata = ViewData["Topics"] as IOrderedEnumerable<Caterpillar.Controllers.MainMenuStudentController.UserTopicViewModel>;
                                 var courseTopic = from topic in vjudata where topic.Course.Id == @item.CourseId select topic;  
                                 <li class="dropdown">
                                     <a href="CaterpillarK.html" class="dropdown-toggle" data-toggle="dropdown"> <h4 class="crno1">  <img src="@Url.Content("~/Content/img/lista.JPG")" width="10%">@item.Course.Name  <b class="caret"></b></h4></a>
