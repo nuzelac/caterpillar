@@ -9,7 +9,7 @@
 
     @foreach (var item in Model) {
         @Html.Raw("questions.push({" +
-            "entry: '" + Html.DisplayFor((modelItem => item.Entry)) + "'," +
+            "entry: " + Html.Raw(Json.Encode((item.Entry))) + "," +
             "id: '" + Html.DisplayFor((modelItem => item.Id)) + "'" +
         "});\n");
     }
