@@ -83,9 +83,9 @@
 		        <li><a href="@Url.Action("Index", @ViewContext.RouteData.Values["controller"].ToString())">@ViewContext.RouteData.Values["controller"].ToString()</a></li>
 		        <li class="active">@ViewContext.RouteData.Values["action"].ToString()</li>
 	        </ol>
-            <div class="lijeviTab col-sm-3">
+            <div class="col-sm-3">
                 <div class="list-group">
-                    <a href="#" class="list-group-item" style="background-color: #f8b787;">
+                    <a href="#" class="list-group-item" style="background-color: #f1700f;border-bottom-right-radius: 50px;">
                         <center>
                             @{
                               //  var StudentName = (ViewData["Teacher"] as Caterpillar.Models.User).Name;
@@ -97,14 +97,14 @@
 
                                 if (Session["Teacher"] != null)
                                 { 
-                                    <h1 class="narancasto1bold" style="font-weight: bold">  @teacher.Name</h1>
-                                    <h1 class="narancasto1bold" style="font-weight: bold">  @teacher.Surname</h1>
+                                    <h1 class="bijelo1bold" style="font-weight: bold">  @teacher.Name</h1>
+                                    <h1 class="bijelo1bold" style="font-weight: bold">  @teacher.Surname</h1>
                                 }
                             }
 
                         </center>
                     </a>
-                    <a href="#" class="list-group-item">
+                    <a href="#" class="list-group-item" style="border-bottom-right-radius: 50px;">
                         <center>
                             Classes and Courses
                         </center>

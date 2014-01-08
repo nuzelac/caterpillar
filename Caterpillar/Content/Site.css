@@ -124,3 +124,8 @@ font-weight: bold;
   font-family: High Tower Text;
   
 }
+
+.nav1 {
+  max-height: 500px;
+  overflow-y:scroll;
+}

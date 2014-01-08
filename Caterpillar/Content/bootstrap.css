@@ -5440,6 +5440,8 @@ a.list-group-item:focus {
 
 .panel-default {
   border-color: #dddddd;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
 .panel-default > .panel-heading {
