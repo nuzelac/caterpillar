@@ -5,288 +5,291 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+	<title>@ViewBag.Title - My ASP.NET Application</title>
+	@Styles.Render("~/Content/css")
 
-    @Scripts.Render("~/bundles/modernizr")
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
+	@Scripts.Render("~/bundles/modernizr")
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
 
-    <!-- caterpillar -->
-    @Scripts.Render("~/bundles/caterpillar")
-    @Scripts.Render("~/bundles/d3.v3")
-    
+	<!-- caterpillar -->
+	@Scripts.Render("~/bundles/caterpillar")
+	@Scripts.Render("~/bundles/d3.v3")
+	
 
-    @RenderSection("scripts", required: false)
+	@RenderSection("scripts", required: false)
 
 </head>
 
 <body>
-    <div class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <a id="gusjenica" href="@Url.Action("Index", "MainMenuStudent")" class="navbar-brand" style="width: 300px;"> <img class="background-image" src="@Url.Content("~/Content/img/caterpillar-pia-nacrtano-dobrasiva.jpg")" width="100%">  </a>
+	<div class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<a id="gusjenica" href="@Url.Action("Index", "MainMenuStudent")" class="navbar-brand" style="width: 300px;"> <img class="background-image" src="@Url.Content("~/Content/img/caterpillar-pia-nacrtano-dobrasiva.jpg")" width="100%">  </a>
 
 
-            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @*Html.ActionLink("Hello " + User.Identity.GetUserName()  + "!", "", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			@*Html.ActionLink("Hello " + User.Identity.GetUserName()  + "!", "", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })*@
 
-            <div class="collapse navbar-collapse navHeaderCollapse">
+			<div class="collapse navbar-collapse navHeaderCollapse">
 
-                <ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right">
 
-                    <li style="color:#f1700f">
-                        @if (Request.IsAuthenticated)
-                        { 
-                            <a style="color:#f1700f">Hi @User.Identity.Name.ToString() ! </a>
-                        }
-                    </li>
-                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
-                    @if (User == null)
-                    {    
-                        <li><a href="@Url.Action("Index","Home")">Main Menu</a></li>
-                    }
-                    else if (User.IsInRole("Administrator"))
-                    {
-                         <li><a href="@Url.Action("Index","MainMenuAdmin")">Main Menu</a></li>
-                    }
-                    else if (User.IsInRole("Teacher"))
-                    {
-                         <li><a href="@Url.Action("Index","MainMenuTeacher")">Main Menu</a></li>
-                    }
-                    else if (User.IsInRole("Student"))
-                    {
-                         <li><a href="@Url.Action("Index","MainMenuStudent")">Main Menu</a></li>
-                    }
-                    else 
-                    {    
-                        <li><a href="@Url.Action("Index","Home")">Main Menu</a></li>
-                    }
-                    <li>@if (Request.IsAuthenticated)
-                        { 
-                            @Html.ActionLink("Log Out", "LogOff", "Account")
-                        }
-                        else 
-                        {
-                            @Html.ActionLink("Log In", "Login", "Account")
-                        }
-                    </li>
-                    <!--<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Facebook</a></li>
-                            <li><a href="#">Gooogle+</a></li>
-                        </ul>
-                    </li>
+					<li style="color:#f1700f">
+						@if (Request.IsAuthenticated)
+						{ 
+							<a style="color:#f1700f">Hi @User.Identity.Name.ToString() ! </a>
+						}
+					</li>
+					<li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+					@if (User == null)
+					{    
+						<li><a href="@Url.Action("Index","Home")">Main Menu</a></li>
+					}
+					else if (User.IsInRole("Administrator"))
+					{
+						 <li><a href="@Url.Action("Index","MainMenuAdmin")">Main Menu</a></li>
+					}
+					else if (User.IsInRole("Teacher"))
+					{
+						 <li><a href="@Url.Action("Index","MainMenuTeacher")">Main Menu</a></li>
+					}
+					else if (User.IsInRole("Student"))
+					{
+						 <li><a href="@Url.Action("Index","MainMenuStudent")">Main Menu</a></li>
+					}
+					else 
+					{    
+						<li><a href="@Url.Action("Index","Home")">Main Menu</a></li>
+					}
+					<li>@if (Request.IsAuthenticated)
+						{ 
+							@Html.ActionLink("Log Out", "LogOff", "Account")
+						}
+						else 
+						{
+							@Html.ActionLink("Log In", "Login", "Account")
+						}
+					</li>
+					<!--<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Twitter</a></li>
+							<li><a href="#">Facebook</a></li>
+							<li><a href="#">Gooogle+</a></li>
+						</ul>
+					</li>
 
-                    <li><a href="#contact" data-toggle="modal">Contact</a></li> -->
+					<li><a href="#contact" data-toggle="modal">Contact</a></li> -->
 
-                </ul>
+				</ul>
 
-            </div>
+			</div>
 
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="list-group">
-                    <a href="#" class="list-group-item" style="background-color: #f1700f; /*border-bottom-left-radius: 90px;*/ border-bottom-right-radius: 50px;">
-                        <center>
-                            @if (Session["OdabraniTopicId"] != null) { 
-                                CaterpillarContext db = new CaterpillarContext();
-                                var topic = db.Topics.Find((int)Session["OdabraniTopicId"]);
-                                
-                                <h1 class="bijelo1bold">@topic.Name</h1>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="list-group">
+					<a href="#" class="list-group-item" style="background-color: #f1700f; /*border-bottom-left-radius: 90px;*/ border-bottom-right-radius: 50px;">
+						<center>
+							@if (Session["OdabraniTopicId"] != null) { 
+								CaterpillarContext db = new CaterpillarContext();
+								var topic = db.Topics.Find((int)Session["OdabraniTopicId"]);
+								
+								<h1 class="bijelo1bold">@topic.Name</h1>
 
-                                <p class="bijelo1">start: @topic.StartDate</p>
-                                <p class="bijelo1">end: @topic.EndDate</p>                            
-                            }
-                        </center>
-                    </a>
-                    <a href="@Url.Action("K", "Caterpillar")" class="list-group-item">
-                        <center>
-                            <img class="featuredImg " src="@Url.Content("~/Content/img/K2.JPG")" width="90%">
+								<p class="bijelo1">start: @topic.StartDate</p>
+								<p class="bijelo1">end: @topic.EndDate</p>                            
+							}
+						</center>
+					</a>
+					<a href="@Url.Action("K", "Caterpillar")" @if (ViewContext.RouteData.Values["action"].ToString() == "K")
+										   {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
+						<center>
+							<img class="featuredImg " src="@Url.Content("~/Content/img/K2.JPG")" width="90%">
 
-                        </center>
-                    </a>
-                    <a href="@Url.Action("W", "Caterpillar")" class="list-group-item">
-                        <center>
-                            <img class="featuredImg " src="@Url.Content("~/Content/img/W2.JPG")" width="90%">
+						</center>
+					</a>
+					<a href="@Url.Action("W", "Caterpillar")" @if (ViewContext.RouteData.Values["action"].ToString() == "W")
+										   {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
+						<center>
+							<img class="featuredImg " src="@Url.Content("~/Content/img/W2.JPG")" width="90%">
 
-                        </center>
-                    </a>
-                    <a href="@Url.Action("L", "Caterpillar")" class="list-group-item">
-                        <center>
-                            <img class="featuredImg " src="@Url.Content("~/Content/img/L2.JPG")" width="90%">
+						</center>
+					</a>
+					<a href="@Url.Action("L", "Caterpillar")" @if (ViewContext.RouteData.Values["action"].ToString() == "L")
+										   {<text> class="list-group-item active"</text>}else{<text> class="list-group-item"</text>}>
+						<center>
+							<img class="featuredImg " src="@Url.Content("~/Content/img/L2.JPG")" width="90%">
 
-                        </center>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-7">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        @RenderBody()
-                    </div>
-                </div>
-            </div>
-            <div class=" col-sm-2">
-                <div class="list-group">
-                   <!--
-                     @if (User == null)
-                    {    
-                        <a href="#" class="list-group-item" style="background-color: #fdf0e7;">
-                            <center>
-                                <h1 class="list-group-item-heading">Main Menu</h1>
-                            </center>
-                        </a>
-                    }
-                    //else if (((Role)Session["PrimljeniUser-Role"]).Name == "Administrator")
-                    else if (User.IsInRole("Administrator"))
-                    {
-                         <a href="@Url.Action("Index","MainMenuAdmin")" class="list-group-item" style="background-color: #fdf0e7;">
-                            <center>
-                                <h1 class="list-group-item-heading">Main Menu</h1>
-                            </center>
-                         </a>
-                    }
-                    else if (User.IsInRole("Teacher"))
-                    {
-                         <a href="@Url.Action("Index","MainMenuTeacher")" class="list-group-item" style="background-color: #fdf0e7;">
-                            <center>
-                                <h1 class="list-group-item-heading">Main Menu</h1>
-                            </center>
-                         </a>
-                    }
-                    else if (User.IsInRole("Student"))
-                    {
-                         <a href="@Url.Action("Index","MainMenuStudent")" class="list-group-item" style="background-color: #fdf0e7;">
-                            <center>
-                                <h1 class="list-group-item-heading">Main Menu</h1>
-                            </center>
-                         </a>
-                    }
-                    else 
-                    {    
-                        <a href="#" class="list-group-item" style="background-color: #fdf0e7;">
-                            <center>
-                                <h1 class="list-group-item-heading">Main Menu</h1>
-                            </center>
-                        </a>
-                    }
-                       -->
-                   
-                        <center>
-                            <h1 class="bijelo1bold" style="background-color: #f1700f; border-bottom-left-radius: 50px; /* border-bottom-right-radius: 50px; */border-width: 50px;padding: 20px;">Users</h1>
-                        </center>
-                        <!--<a href="#"><p class="list-group-item-body">Me</p></a>
-                        <a href="#"><p class="list-group-item-body">Teacher</p></a>-->
-                        @if (Session["OdabraniTopicId"] != null)
-                        {
+						</center>
+					</a>
+				</div>
+			</div>
+			<div class="col-sm-7">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						@RenderBody()
+					</div>
+				</div>
+			</div>
+			<div class=" col-sm-2">
+				<div class="list-group">
+				   <!--
+					 @if (User == null)
+					{    
+						<a href="#" class="list-group-item" style="background-color: #fdf0e7;">
+							<center>
+								<h1 class="list-group-item-heading">Main Menu</h1>
+							</center>
+						</a>
+					}
+					//else if (((Role)Session["PrimljeniUser-Role"]).Name == "Administrator")
+					else if (User.IsInRole("Administrator"))
+					{
+						 <a href="@Url.Action("Index","MainMenuAdmin")" class="list-group-item" style="background-color: #fdf0e7;">
+							<center>
+								<h1 class="list-group-item-heading">Main Menu</h1>
+							</center>
+						 </a>
+					}
+					else if (User.IsInRole("Teacher"))
+					{
+						 <a href="@Url.Action("Index","MainMenuTeacher")" class="list-group-item" style="background-color: #fdf0e7;">
+							<center>
+								<h1 class="list-group-item-heading">Main Menu</h1>
+							</center>
+						 </a>
+					}
+					else if (User.IsInRole("Student"))
+					{
+						 <a href="@Url.Action("Index","MainMenuStudent")" class="list-group-item" style="background-color: #fdf0e7;">
+							<center>
+								<h1 class="list-group-item-heading">Main Menu</h1>
+							</center>
+						 </a>
+					}
+					else 
+					{    
+						<a href="#" class="list-group-item" style="background-color: #fdf0e7;">
+							<center>
+								<h1 class="list-group-item-heading">Main Menu</h1>
+							</center>
+						</a>
+					}
+					   -->
+				   
+						<center>
+							<h1 class="bijelo1bold" style="background-color: #f1700f; border-bottom-left-radius: 50px; /* border-bottom-right-radius: 50px; */border-width: 50px;padding: 20px;">Users</h1>
+						</center>
+						<!--<a href="#"><p class="list-group-item-body">Me</p></a>
+						<a href="#"><p class="list-group-item-body">Teacher</p></a>-->
+						@if (Session["OdabraniTopicId"] != null)
+						{
 
-                            CaterpillarContext db = new CaterpillarContext();
-                            var topic = db.Topics.Find((int)Session["OdabraniTopicId"]);
-                            var studentClass = (Caterpillar.Models.Class)Session["Class"];
-                            var usersOfClassCourse = (from a in db.UserClassCourses
-                                                     where a.ClassId == studentClass.Id && a.User.Role.Name == "Student"
-                                                     select new
-                                                     {
-                                                         User = a.User
-                                                     }).Distinct();
-                            <ol>
-                                @foreach (var item in usersOfClassCourse)
-                                {
-                                    <li>
-                                        @item.User.Name @item.User.Surname
-                                    </li>
-                                }
-                            </ol>
-                        }
-                    
-                    
-                        <center>
-                           <h1 class="bijelo1bold" style="background-color: #f1700f; border-bottom-left-radius: 50px; padding: 20px;">Scores</h1>
-                        </center>
-                        @if (Session["OdabraniTopicId"] != null)
-                        {
-                            
-                            CaterpillarContext db = new CaterpillarContext();
-                            var studentClass = (Caterpillar.Models.Class)Session["Class"];                            
-                            var usersOfClassCourse = (from a in db.UserClassCourses
-                                                      where a.ClassId == studentClass.Id && a.User.Role.Name == "Student"
-                                                      select a.User).Distinct();                            
-                            var topic = db.Topics.Find((int)Session["OdabraniTopicId"]);
-                            var scores = db.Responses.Include(a => a.User).Include(a => a.KWLentry.Topic).Where(a => a.KWLentry.TopicId == topic.Id).Where(a => usersOfClassCourse.Contains(a.User)).GroupBy(o => o.UserId)
-                                .Select(g => new { student = g.Key, score = g.Sum(i => i.Points) }).Where(g => g.score > 0).OrderByDescending(g => g.score).Take(5);
-                            
-                            <ol>
-                            @foreach (var item in scores)
-                            {
-                                var student = db.Users.Find(item.student);
-                                <li>
-                                    @student.Name @student.Surname
-                                    @item.score
-                                </li>
-                            }
-                        </ol>
-                        }
-                </div>
-            </div>
-        </div>
-    </div>
+							CaterpillarContext db = new CaterpillarContext();
+							var topic = db.Topics.Find((int)Session["OdabraniTopicId"]);
+							var studentClass = (Caterpillar.Models.Class)Session["Class"];
+							var usersOfClassCourse = (from a in db.UserClassCourses
+													 where a.ClassId == studentClass.Id && a.User.Role.Name == "Student"
+													 select new
+													 {
+														 User = a.User
+													 }).Distinct();
+							<ol>
+								@foreach (var item in usersOfClassCourse)
+								{
+									<li>
+										@item.User.Name @item.User.Surname
+									</li>
+								}
+							</ol>
+						}
+					
+					
+						<center>
+						   <h1 class="bijelo1bold" style="background-color: #f1700f; border-bottom-left-radius: 50px; padding: 20px;">Scores</h1>
+						</center>
+						@if (Session["OdabraniTopicId"] != null)
+						{
+							
+							CaterpillarContext db = new CaterpillarContext();
+							var studentClass = (Caterpillar.Models.Class)Session["Class"];                            
+							var usersOfClassCourse = (from a in db.UserClassCourses
+													  where a.ClassId == studentClass.Id && a.User.Role.Name == "Student"
+													  select a.User).Distinct();                            
+							var topic = db.Topics.Find((int)Session["OdabraniTopicId"]);
+							var scores = db.Responses.Include(a => a.User).Include(a => a.KWLentry.Topic).Where(a => a.KWLentry.TopicId == topic.Id).Where(a => usersOfClassCourse.Contains(a.User)).GroupBy(o => o.UserId)
+								.Select(g => new { student = g.Key, score = g.Sum(i => i.Points) }).Where(g => g.score > 0).OrderByDescending(g => g.score).Take(5);
+							
+							<ol>
+							@foreach (var item in scores)
+							{
+								var student = db.Users.Find(item.student);
+								<li>
+									@student.Name @student.Surname
+									@item.score
+								</li>
+							}
+						</ol>
+						}
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <!--		<div class = "navbar navbar-default navbar-fixed-bottom">
-                <div class = "container">
-                    <p class = "navbar-text pull-left">Site Built by Delan</p>
-                    <a class = "navbar-btn btn-danger btn pull-right">Subscribe on Youtube</a>
-                </div>
-            </div>
-    -->
+	<!--		<div class = "navbar navbar-default navbar-fixed-bottom">
+				<div class = "container">
+					<p class = "navbar-text pull-left">Site Built by Delan</p>
+					<a class = "navbar-btn btn-danger btn pull-right">Subscribe on Youtube</a>
+				</div>
+			</div>
+	-->
 
 
-    <div class="modal fade" id="contact" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form class="form-horizontal">
-                    <div class="modal-header">
-                        <h4>Contact Caterpillar Support</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="contact-name" class="col-lg-2 control-label">Name:</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="contact-name" placeholder="Full name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="contact-email" class="col-lg-2 control-label">E-mail:</label>
-                            <div class="col-lg-10">
-                                <input type="email" class="form-control" id="contact-name2" placeholder="you@example.com">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="contact-message" class="col-lg-2 control-label">Name:</label>
-                            <div class="col-lg-10">
-                                <textarea class="form-control" rows="8"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" type="submit">Submit</button>
-                        <a class="btn btn-primary" data-dismiss="modal">Close</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" id="contact" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form class="form-horizontal">
+					<div class="modal-header">
+						<h4>Contact Caterpillar Support</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="contact-name" class="col-lg-2 control-label">Name:</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="contact-name" placeholder="Full name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contact-email" class="col-lg-2 control-label">E-mail:</label>
+							<div class="col-lg-10">
+								<input type="email" class="form-control" id="contact-name2" placeholder="you@example.com">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contact-message" class="col-lg-2 control-label">Name:</label>
+							<div class="col-lg-10">
+								<textarea class="form-control" rows="8"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-default" type="submit">Submit</button>
+						<a class="btn btn-primary" data-dismiss="modal">Close</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 </body>
 
