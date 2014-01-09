@@ -117,6 +117,7 @@ namespace Caterpillar.Controllers
                 {
                     user.RoleId = 3;
                     user.Role = db.Roles.Where(u => u.Id == user.RoleId).FirstOrDefault();
+                    user.Password = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password, "SHA1");
                     db.Users.Add(user);
                     db.SaveChanges();
                     System.Web.Security.FormsAuthentication.SetAuthCookie(user.UserName, false);

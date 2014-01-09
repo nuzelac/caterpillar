@@ -44,8 +44,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
-        <td>
-            @item.Password.Substring(0,8)...
+        <td>@if(item.Password.Length > 9)
+            {
+                @(item.Password.Substring(0,8)+"...")
+            }
+            else
+            {
+                @item.Password
+            }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
