@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>@ViewBag.Title - My ASP.NET Application</title>
+	<title>@ViewBag.Title - Caterpillar</title>
 	@Styles.Render("~/Content/css")
 
 	@Scripts.Render("~/bundles/modernizr")
@@ -87,7 +87,9 @@
 					</li>
 
 					<li><a href="#contact" data-toggle="modal">Contact</a></li> -->
-
+                    <li>
+                        @Html.ActionLink("About", "About", "Home")
+                    </li>
 				</ul>
 
 			</div>
