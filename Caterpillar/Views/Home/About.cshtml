@@ -1,8 +1,28 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About Caterpillar";
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<style>
+    p {
+        text-align: left;
+    }
+
+    @@media screen and (min-width: 48em) {
+        p {
+            text-align: justify;
+        }
+    }
+    p {
+        text-indent: 50px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>@ViewBag.Title</h2>
+        <p>Today’s modern scholar system is trying to step away from the traditional way of teaching, where the students are passive in classrooms, and step into an active way of learning, where students are motivated to wonder, think and discover. There are many approaches for teaching students that are trying to make a class more dynamic, one of them is a KWL method which is a base of Caterpillar web application.</p>
+        <p>KWL method is based on three simple questions that are part of every process of studying – “What I <b>K</b>NOW?”, “What I <b>W</b>ANT to know?” and “What I <b>L</b>EARNED?”. It is helping both students and teacher. Students are encouraged to investigate, ask questions, learn from each other and at the end of studying period they can connect and compare their knowledge before and after. On the other hand, teacher has a valuable information about how much his students knew at the beginning, what are they interested in so that the he would know where to focus, and how much his students learned at the end.</p>
+        <p>Caterpillar web application is designed for elementary schools. Therefore it is using an animal caterpillar so that studying for young children would seem more fun and feel like playing because every new question and answer will make their caterpillar longer and they will get more points.</p>
+    </div>
+</div>
